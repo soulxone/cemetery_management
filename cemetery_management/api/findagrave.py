@@ -27,6 +27,20 @@ HEADERS = {
 
 
 @frappe.whitelist()
+def enqueue_import(cemetery_name="Pleasant Springs Cemetery"):
+    """Enqueue the import as a background job (callable from browser)."""
+    frappe.enqueue(
+        "cemetery_management.api.findagrave.import_memorials",
+        queue="long",
+        timeout=3600,
+        cemetery_name=cemetery_name,
+        dry_run=False,
+    )
+    frappe.msgprint("FindAGrave import has been queued. Check Background Jobs for progress.")
+    return "Import queued"
+
+
+@frappe.whitelist()
 def import_memorials(cemetery_name="Pleasant Springs Cemetery", dry_run=False):
     """Main entry point: import all FindAGrave memorials for a cemetery.
 
