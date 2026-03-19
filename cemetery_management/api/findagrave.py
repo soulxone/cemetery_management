@@ -137,6 +137,103 @@ def enrich_all_records():
 
 
 @frappe.whitelist()
+def bulk_update_from_json(updates_json):
+    """Bulk update burial records from JSON data scraped from FindAGrave.
+
+    Args:
+        updates_json: JSON string with array of {memorial_id, full_name, first_name,
+                      middle_name, last_name, birth_date, death_date}
+    """
+    updates = json.loads(updates_json) if isinstance(updates_json, str) else updates_json
+
+    updated = 0
+    not_found = 0
+    skipped = 0
+    errors = 0
+
+    for u in updates:
+        memorial_id = str(u.get("memorial_id", ""))
+        if not memorial_id:
+            continue
+
+        try:
+            records = frappe.get_all(
+                "Burial Record",
+                filters={"findagrave_memorial_id": memorial_id},
+                fields=["name", "first_name", "date_of_birth", "date_of_death"],
+                limit_page_length=1,
+            )
+
+            if not records:
+                not_found += 1
+                continue
+
+            rec = records[0]
+            changed = False
+            update_fields = {}
+
+            # Update name if Unknown
+            if rec.first_name == "Unknown" and u.get("first_name"):
+                update_fields["first_name"] = u["first_name"]
+                update_fields["middle_name"] = u.get("middle_name", "")
+                update_fields["last_name"] = u.get("last_name", "Unknown")
+                update_fields["full_name"] = u.get("full_name", "")
+                changed = True
+
+            # Update dates if missing
+            if not rec.date_of_birth and u.get("birth_date"):
+                update_fields["date_of_birth"] = u["birth_date"]
+                changed = True
+
+            if not rec.date_of_death and u.get("death_date"):
+                update_fields["date_of_death"] = u["death_date"]
+                changed = True
+
+            if changed:
+                frappe.db.set_value("Burial Record", rec.name, update_fields, update_modified=True)
+                updated += 1
+            else:
+                skipped += 1
+
+        except Exception as e:
+            errors += 1
+            frappe.log_error(f"Bulk update error for memorial {memorial_id}: {e}")
+
+    frappe.db.commit()
+    return {"updated": updated, "not_found": not_found, "skipped": skipped, "errors": errors}
+
+
+@frappe.whitelist()
+def bulk_submit_records():
+    """Submit all draft burial records."""
+    drafts = frappe.get_all(
+        "Burial Record",
+        filters={"docstatus": 0, "first_name": ["!=", "Unknown"]},
+        fields=["name"],
+        limit_page_length=0,
+    )
+
+    submitted = 0
+    errors = 0
+
+    for d in drafts:
+        try:
+            doc = frappe.get_doc("Burial Record", d.name)
+            doc.flags.ignore_mandatory = True
+            doc.submit()
+            submitted += 1
+        except Exception as e:
+            errors += 1
+            frappe.log_error(f"Submit error for {d.name}: {e}")
+
+        if submitted % 50 == 0:
+            frappe.db.commit()
+
+    frappe.db.commit()
+    return {"submitted": submitted, "errors": errors, "total": len(drafts)}
+
+
+@frappe.whitelist()
 def import_memorials(cemetery_name="Pleasant Springs Cemetery", dry_run=False):
     """Main entry point: import all FindAGrave memorials for a cemetery.
 
