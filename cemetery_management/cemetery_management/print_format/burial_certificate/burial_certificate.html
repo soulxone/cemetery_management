@@ -1,0 +1,161 @@
+<style>
+    .burial-cert {
+        font-family: 'Georgia', serif;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 40px;
+        border: 3px double #4A7C59;
+        position: relative;
+    }
+    .burial-cert::before {
+        content: '';
+        position: absolute;
+        top: 8px; left: 8px; right: 8px; bottom: 8px;
+        border: 1px solid #4A7C59;
+        pointer-events: none;
+    }
+    .cert-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .cert-header h1 {
+        font-size: 28px;
+        color: #4A7C59;
+        margin: 0 0 5px 0;
+        font-weight: normal;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    .cert-header h2 {
+        font-size: 16px;
+        color: #666;
+        margin: 0;
+        font-weight: normal;
+    }
+    .cert-header hr {
+        width: 60%;
+        margin: 15px auto;
+        border: none;
+        border-top: 1px solid #4A7C59;
+    }
+    .cert-title {
+        text-align: center;
+        font-size: 22px;
+        color: #333;
+        margin: 20px 0 30px 0;
+        font-weight: bold;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+    .cert-body {
+        font-size: 14px;
+        line-height: 2;
+        color: #333;
+    }
+    .cert-field {
+        border-bottom: 1px solid #999;
+        padding: 0 5px;
+        font-weight: bold;
+        min-width: 100px;
+        display: inline-block;
+    }
+    .cert-row {
+        margin-bottom: 8px;
+    }
+    .cert-footer {
+        margin-top: 40px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .cert-sig {
+        text-align: center;
+        width: 200px;
+    }
+    .cert-sig-line {
+        border-top: 1px solid #333;
+        margin-top: 40px;
+        padding-top: 5px;
+        font-size: 12px;
+        color: #666;
+    }
+    .cert-number {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 11px;
+        color: #999;
+    }
+</style>
+
+<div class="burial-cert">
+    <div class="cert-header">
+        <h1>{{ doc.cemetery or "Pleasant Springs Cemetery" }}</h1>
+        <h2>Henderson, Tennessee</h2>
+        <hr>
+    </div>
+
+    <div class="cert-title">Certificate of Burial</div>
+
+    <div class="cert-body">
+        <div class="cert-row">
+            This is to certify that <span class="cert-field">{{ doc.full_name or "" }}</span>
+            {% if doc.maiden_name %}(n&eacute;e <span class="cert-field">{{ doc.maiden_name }}</span>){% endif %}
+        </div>
+
+        <div class="cert-row">
+            Born: <span class="cert-field">{{ doc.date_of_birth | default("Unknown", true) }}</span>
+            &nbsp;&nbsp;
+            Died: <span class="cert-field">{{ doc.date_of_death | default("Unknown", true) }}</span>
+            {% if doc.age_at_death %}
+            &nbsp;&nbsp;Age: <span class="cert-field">{{ doc.age_at_death }}</span>
+            {% endif %}
+        </div>
+
+        <div class="cert-row">
+            was interred at {{ doc.cemetery or "Pleasant Springs Cemetery" }}
+            {% if doc.burial_plot %}
+            in Plot <span class="cert-field">{{ doc.burial_plot }}</span>
+            {% endif %}
+        </div>
+
+        <div class="cert-row">
+            {% if doc.interment_date %}
+            on <span class="cert-field">{{ frappe.utils.formatdate(doc.interment_date, "MMMM d, yyyy") }}</span>
+            {% endif %}
+            {% if doc.interment_type %}
+            by means of <span class="cert-field">{{ doc.interment_type }}</span>
+            {% endif %}
+        </div>
+
+        {% if doc.is_veteran %}
+        <div class="cert-row">
+            Veteran: <span class="cert-field">{{ doc.military_branch or "United States Armed Forces" }}</span>
+            {% if doc.military_rank %} — {{ doc.military_rank }}{% endif %}
+        </div>
+        {% endif %}
+
+        {% if doc.funeral_home %}
+        <div class="cert-row">
+            Funeral Home: <span class="cert-field">{{ doc.funeral_home }}</span>
+        </div>
+        {% endif %}
+
+        {% if doc.officiant %}
+        <div class="cert-row">
+            Officiant: <span class="cert-field">{{ doc.officiant }}</span>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="cert-footer">
+        <div class="cert-sig">
+            <div class="cert-sig-line">Cemetery Sexton</div>
+        </div>
+        <div class="cert-sig">
+            <div class="cert-sig-line">Date</div>
+        </div>
+    </div>
+
+    <div class="cert-number">
+        Certificate No: {{ doc.name }}
+    </div>
+</div>

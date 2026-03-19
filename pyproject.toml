@@ -1,0 +1,17 @@
+[project]
+name = "cemetery_management"
+version = "0.1.0"
+description = "Cemetery Management for Frappe/ERPNext"
+authors = [
+    {name = "PS Church", email = "soulxone@gmail.com"}
+]
+license = {text = "AGPLv3"}
+requires-python = ">=3.10"
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.bench.frappe-dependencies]
+frappe = ">=16.0.0-dev,<17.0.0"
+erpnext = ">=16.0.0-dev,<17.0.0"

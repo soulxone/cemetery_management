@@ -1,0 +1,20 @@
+{
+  "aggregate_function_based_on": "",
+  "creation": "2026-03-18 12:00:00.000000",
+  "doctype": "Number Card",
+  "document_type": "Burial Record",
+  "dynamic_filters_json": "[]",
+  "filters_json": "[[\"Burial Record\",\"docstatus\",\"=\",\"1\"]]",
+  "function": "Count",
+  "is_public": 1,
+  "is_standard": 1,
+  "label": "Total Burials",
+  "modified": "2026-03-18 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Total Burials",
+  "owner": "Administrator",
+  "show_percentage_stats": 0,
+  "stats_time_interval": "Monthly",
+  "type": "Document Type"
+}

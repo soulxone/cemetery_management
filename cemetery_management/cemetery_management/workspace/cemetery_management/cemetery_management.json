@@ -1,0 +1,214 @@
+{
+  "charts": [],
+  "content": "[{\"id\":\"cemetery_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Cemetery Management</b></span>\",\"col\":12}},{\"id\":\"cemetery_shortcuts\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Burial Record\",\"col\":4}},{\"id\":\"cemetery_shortcuts2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Burial Plot\",\"col\":4}},{\"id\":\"cemetery_shortcuts3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cemetery\",\"col\":4}},{\"id\":\"number_cards\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Burials\",\"col\":3}},{\"id\":\"number_cards2\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Occupied Plots\",\"col\":3}},{\"id\":\"number_cards3\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Available Plots\",\"col\":3}},{\"id\":\"number_cards4\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Revenue\",\"col\":3}}]",
+  "creation": "2026-03-18 12:00:00.000000",
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "map-pin",
+  "idx": 0,
+  "is_default": 0,
+  "is_standard": 1,
+  "label": "Cemetery Management",
+  "links": [
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Cemetery Records",
+      "link_count": 0,
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Cemetery",
+      "link_count": 0,
+      "link_to": "Cemetery",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Burial Record",
+      "link_count": 0,
+      "link_to": "Burial Record",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Burial Plot",
+      "link_count": 0,
+      "link_to": "Burial Plot",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Sales & Finance",
+      "link_count": 0,
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Plot Sale",
+      "link_count": 0,
+      "link_to": "Plot Sale",
+      "link_type": "DocType",
+      "onboard": 1,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Cemetery Service Invoice",
+      "link_count": 0,
+      "link_to": "Cemetery Service Invoice",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Cemetery Fee Type",
+      "link_count": 0,
+      "link_to": "Cemetery Fee Type",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "People & Ownership",
+      "link_count": 0,
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Plot Owner",
+      "link_count": 0,
+      "link_to": "Plot Owner",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Funeral Home",
+      "link_count": 0,
+      "link_to": "Funeral Home",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Reports",
+      "link_count": 0,
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Cemetery Occupancy",
+      "link_count": 0,
+      "link_to": "Cemetery Occupancy",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 1,
+      "label": "Burial Records Report",
+      "link_count": 0,
+      "link_to": "Burial Records Report",
+      "link_type": "Report",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Settings",
+      "link_count": 0,
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Monument Type",
+      "link_count": 0,
+      "link_to": "Monument Type",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Cemetery Settings",
+      "link_count": 0,
+      "link_to": "Cemetery Settings",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    }
+  ],
+  "modified": "2026-03-18 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Cemetery Management",
+  "owner": "Administrator",
+  "parent_page": "",
+  "public": 1,
+  "restrict_to_domain": "",
+  "roles": [],
+  "sequence_id": 30,
+  "shortcuts": [
+    {
+      "color": "#4A7C59",
+      "doc_view": "List",
+      "label": "Burial Record",
+      "link_to": "Burial Record",
+      "type": "DocType"
+    },
+    {
+      "color": "#4A7C59",
+      "doc_view": "List",
+      "label": "Burial Plot",
+      "link_to": "Burial Plot",
+      "type": "DocType"
+    },
+    {
+      "color": "#4A7C59",
+      "doc_view": "List",
+      "label": "Cemetery",
+      "link_to": "Cemetery",
+      "type": "DocType"
+    }
+  ],
+  "title": "Cemetery Management"
+}

@@ -1,0 +1,15 @@
+{
+  "add_total_row": 1,
+  "creation": "2026-03-18 12:00:00.000000",
+  "doctype": "Report",
+  "is_standard": "Yes",
+  "module": "Cemetery Management",
+  "name": "Cemetery Financial Summary",
+  "ref_doctype": "Plot Sale",
+  "report_name": "Cemetery Financial Summary",
+  "report_type": "Script Report",
+  "modified": "2026-03-18 12:00:00.000000",
+  "modified_by": "Administrator",
+  "owner": "Administrator",
+  "roles": [{"role": "System Manager"}]
+}

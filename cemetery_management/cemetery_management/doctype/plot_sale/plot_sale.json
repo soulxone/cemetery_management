@@ -1,0 +1,237 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-18 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "sale_date",
+    "company",
+    "buyer_section",
+    "buyer_name",
+    "plot_owner",
+    "column_break_buyer",
+    "church_member",
+    "plot_section",
+    "burial_plot",
+    "column_break_plot",
+    "cemetery",
+    "financial_section",
+    "cemetery_fee_type",
+    "amount",
+    "column_break_fin",
+    "payment_method",
+    "payment_reference",
+    "perpetual_care_section",
+    "perpetual_care_amount",
+    "column_break_pc",
+    "perpetual_care_account",
+    "accounting_section",
+    "journal_entry",
+    "perpetual_care_journal_entry",
+    "notes_section",
+    "notes",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "default": "PLS-.YYYY.-.#####",
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "options": "PLS-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "sale_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Sale Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "buyer_section",
+      "fieldtype": "Section Break",
+      "label": "Buyer Information"
+    },
+    {
+      "bold": 1,
+      "fieldname": "buyer_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Buyer Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "plot_owner",
+      "fieldtype": "Link",
+      "label": "Plot Owner",
+      "options": "Plot Owner"
+    },
+    {
+      "fieldname": "column_break_buyer",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "church_member",
+      "fieldtype": "Link",
+      "label": "Church Member",
+      "options": "Church Member"
+    },
+    {
+      "fieldname": "plot_section",
+      "fieldtype": "Section Break",
+      "label": "Plot Details"
+    },
+    {
+      "fieldname": "burial_plot",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Burial Plot",
+      "options": "Burial Plot",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_plot",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fetch_from": "burial_plot.cemetery",
+      "fieldname": "cemetery",
+      "fieldtype": "Link",
+      "label": "Cemetery",
+      "options": "Cemetery",
+      "read_only": 1
+    },
+    {
+      "fieldname": "financial_section",
+      "fieldtype": "Section Break",
+      "label": "Financial Details"
+    },
+    {
+      "fieldname": "cemetery_fee_type",
+      "fieldtype": "Link",
+      "label": "Cemetery Fee Type",
+      "options": "Cemetery Fee Type",
+      "reqd": 1
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Amount",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_fin",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payment_method",
+      "fieldtype": "Select",
+      "label": "Payment Method",
+      "options": "\nCash\nCheck\nCard\nBank Transfer\nOther"
+    },
+    {
+      "fieldname": "payment_reference",
+      "fieldtype": "Data",
+      "label": "Payment Reference"
+    },
+    {
+      "fieldname": "perpetual_care_section",
+      "fieldtype": "Section Break",
+      "label": "Perpetual Care"
+    },
+    {
+      "description": "Auto-computed from Cemetery Settings percentage",
+      "fieldname": "perpetual_care_amount",
+      "fieldtype": "Currency",
+      "label": "Perpetual Care Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_pc",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "perpetual_care_account",
+      "fieldtype": "Link",
+      "label": "Perpetual Care Account",
+      "options": "Account",
+      "read_only": 1
+    },
+    {
+      "fieldname": "accounting_section",
+      "fieldtype": "Section Break",
+      "label": "Accounting"
+    },
+    {
+      "fieldname": "journal_entry",
+      "fieldtype": "Link",
+      "label": "Journal Entry",
+      "no_copy": 1,
+      "options": "Journal Entry",
+      "read_only": 1
+    },
+    {
+      "fieldname": "perpetual_care_journal_entry",
+      "fieldtype": "Link",
+      "label": "Perpetual Care Journal Entry",
+      "no_copy": 1,
+      "options": "Journal Entry",
+      "read_only": 1
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Plot Sale",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-03-18 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Plot Sale",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "amend": 1,
+      "cancel": 1,
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "role": "System Manager",
+      "submit": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "buyer_name",
+  "track_changes": 1
+}

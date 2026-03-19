@@ -1,0 +1,136 @@
+<style>
+    .plot-deed {
+        font-family: 'Georgia', serif;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 40px;
+        border: 3px double #4A7C59;
+        position: relative;
+    }
+    .plot-deed::before {
+        content: '';
+        position: absolute;
+        top: 8px; left: 8px; right: 8px; bottom: 8px;
+        border: 1px solid #4A7C59;
+        pointer-events: none;
+    }
+    .deed-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .deed-header h1 {
+        font-size: 28px;
+        color: #4A7C59;
+        margin: 0 0 5px 0;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: normal;
+    }
+    .deed-header h2 {
+        font-size: 16px;
+        color: #666;
+        margin: 0;
+        font-weight: normal;
+    }
+    .deed-header hr {
+        width: 60%;
+        margin: 15px auto;
+        border: none;
+        border-top: 1px solid #4A7C59;
+    }
+    .deed-title {
+        text-align: center;
+        font-size: 22px;
+        margin: 20px 0 30px 0;
+        font-weight: bold;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+    .deed-body {
+        font-size: 14px;
+        line-height: 2.2;
+    }
+    .deed-field {
+        border-bottom: 1px solid #999;
+        padding: 0 5px;
+        font-weight: bold;
+        min-width: 80px;
+        display: inline-block;
+    }
+    .deed-footer {
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .deed-sig {
+        text-align: center;
+        width: 200px;
+    }
+    .deed-sig-line {
+        border-top: 1px solid #333;
+        margin-top: 50px;
+        padding-top: 5px;
+        font-size: 12px;
+        color: #666;
+    }
+    .deed-number {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 11px;
+        color: #999;
+    }
+</style>
+
+<div class="plot-deed">
+    <div class="deed-header">
+        <h1>{{ doc.cemetery or "Pleasant Springs Cemetery" }}</h1>
+        <h2>Henderson, Tennessee</h2>
+        <hr>
+    </div>
+
+    <div class="deed-title">Deed of Burial Rights</div>
+
+    <div class="deed-body">
+        <p>
+            This deed certifies that <span class="deed-field">{{ doc.buyer_name }}</span>
+            has purchased the right of burial in
+        </p>
+        <p>
+            Plot <span class="deed-field">{{ doc.burial_plot }}</span>
+            at {{ doc.cemetery or "Pleasant Springs Cemetery" }}
+        </p>
+        <p>
+            for the sum of <span class="deed-field">${{ frappe.utils.fmt_money(doc.amount) }}</span>
+            paid on <span class="deed-field">{{ frappe.utils.formatdate(doc.sale_date, "MMMM d, yyyy") }}</span>
+        </p>
+        <p>
+            Payment Method: <span class="deed-field">{{ doc.payment_method or "N/A" }}</span>
+            {% if doc.payment_reference %}
+            Reference: <span class="deed-field">{{ doc.payment_reference }}</span>
+            {% endif %}
+        </p>
+        {% if doc.perpetual_care_amount %}
+        <p>
+            Perpetual Care Contribution: <span class="deed-field">${{ frappe.utils.fmt_money(doc.perpetual_care_amount) }}</span>
+        </p>
+        {% endif %}
+        <p style="margin-top: 20px; font-size: 12px; line-height: 1.6;">
+            This deed grants burial rights only and does not convey ownership of the land.
+            The right of burial is subject to the rules and regulations of the cemetery as
+            currently in effect or as may be amended from time to time.
+        </p>
+    </div>
+
+    <div class="deed-footer">
+        <div class="deed-sig">
+            <div class="deed-sig-line">Cemetery Authorized Signatory</div>
+        </div>
+        <div class="deed-sig">
+            <div class="deed-sig-line">Purchaser</div>
+        </div>
+    </div>
+
+    <div class="deed-number">
+        Deed No: {{ doc.name }}
+    </div>
+</div>

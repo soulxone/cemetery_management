@@ -1,0 +1,107 @@
+{
+  "actions": [],
+  "autoname": "format:OWN-{####}",
+  "creation": "2026-03-18 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "owner_name",
+    "church_member",
+    "column_break_1",
+    "phone",
+    "email",
+    "address_section",
+    "address",
+    "plots_section",
+    "owned_plots",
+    "notes_section",
+    "notes"
+  ],
+  "fields": [
+    {
+      "bold": 1,
+      "fieldname": "owner_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Owner Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "church_member",
+      "fieldtype": "Link",
+      "label": "Church Member",
+      "options": "Church Member"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "address_section",
+      "fieldtype": "Section Break",
+      "label": "Address"
+    },
+    {
+      "fieldname": "address",
+      "fieldtype": "Small Text",
+      "label": "Address"
+    },
+    {
+      "fieldname": "plots_section",
+      "fieldtype": "Section Break",
+      "label": "Owned Plots"
+    },
+    {
+      "fieldname": "owned_plots",
+      "fieldtype": "Table",
+      "label": "Owned Plots",
+      "options": "Plot Transfer"
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-03-18 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Plot Owner",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 0,
+      "cancel": 0,
+      "amend": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "owner_name",
+  "track_changes": 1
+}

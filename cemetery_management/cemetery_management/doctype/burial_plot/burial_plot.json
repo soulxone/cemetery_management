@@ -1,0 +1,243 @@
+{
+ "actions": [],
+ "autoname": "format:PLT-{cemetery_abbr}-{section}-{row}-{plot_number}",
+ "creation": "2026-03-18 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "cemetery",
+  "cemetery_abbr",
+  "location_section",
+  "section",
+  "row",
+  "plot_number",
+  "column_break_loc",
+  "position",
+  "plot_type",
+  "status",
+  "column_break_cap",
+  "max_interments",
+  "current_interments",
+  "gps_section",
+  "latitude",
+  "column_break_gps",
+  "longitude",
+  "monument_section",
+  "has_monument",
+  "monument_type",
+  "column_break_mon",
+  "monument_inscription",
+  "ownership_section",
+  "plot_owner",
+  "deed_number",
+  "column_break_own",
+  "purchase_date",
+  "purchase_amount",
+  "notes_section",
+  "notes",
+  "column_break_img",
+  "image"
+ ],
+ "fields": [
+  {
+   "fieldname": "cemetery",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Cemetery",
+   "options": "Cemetery",
+   "reqd": 1
+  },
+  {
+   "description": "Auto-set from cemetery name",
+   "fieldname": "cemetery_abbr",
+   "fieldtype": "Data",
+   "label": "Cemetery Abbr",
+   "read_only": 1
+  },
+  {
+   "fieldname": "location_section",
+   "fieldtype": "Section Break",
+   "label": "Plot Location"
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Section"
+  },
+  {
+   "fieldname": "row",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Row"
+  },
+  {
+   "fieldname": "plot_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Plot Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_loc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "position",
+   "fieldtype": "Select",
+   "label": "Position",
+   "options": "\nSingle\nCompanion-Left\nCompanion-Right\nFamily"
+  },
+  {
+   "default": "Standard",
+   "fieldname": "plot_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Plot Type",
+   "options": "Standard\nCompanion\nFamily\nCremation\nMausoleum\nInfant\nVeteran",
+   "reqd": 1
+  },
+  {
+   "default": "Available",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Available\nOccupied\nReserved\nUnavailable\nPre-Need",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_cap",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "max_interments",
+   "fieldtype": "Int",
+   "label": "Max Interments"
+  },
+  {
+   "default": "0",
+   "fieldname": "current_interments",
+   "fieldtype": "Int",
+   "label": "Current Interments",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gps_section",
+   "fieldtype": "Section Break",
+   "label": "GPS Coordinates"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Float",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "column_break_gps",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Float",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "monument_section",
+   "fieldtype": "Section Break",
+   "label": "Monument"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_monument",
+   "fieldtype": "Check",
+   "label": "Has Monument"
+  },
+  {
+   "depends_on": "eval:doc.has_monument",
+   "fieldname": "monument_type",
+   "fieldtype": "Link",
+   "label": "Monument Type",
+   "options": "Monument Type"
+  },
+  {
+   "fieldname": "column_break_mon",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.has_monument",
+   "fieldname": "monument_inscription",
+   "fieldtype": "Small Text",
+   "label": "Monument Inscription"
+  },
+  {
+   "fieldname": "ownership_section",
+   "fieldtype": "Section Break",
+   "label": "Ownership"
+  },
+  {
+   "fieldname": "plot_owner",
+   "fieldtype": "Link",
+   "label": "Plot Owner",
+   "options": "Plot Owner"
+  },
+  {
+   "fieldname": "deed_number",
+   "fieldtype": "Data",
+   "label": "Deed Number"
+  },
+  {
+   "fieldname": "column_break_own",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "purchase_date",
+   "fieldtype": "Date",
+   "label": "Purchase Date"
+  },
+  {
+   "fieldname": "purchase_amount",
+   "fieldtype": "Currency",
+   "label": "Purchase Amount"
+  },
+  {
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "column_break_img",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-03-18 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cemetery Management",
+ "name": "Burial Plot",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

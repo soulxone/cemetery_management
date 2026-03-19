@@ -1,0 +1,224 @@
+{
+  "actions": [],
+  "autoname": "field:cemetery_name",
+  "creation": "2026-03-18 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "cemetery_name",
+    "status",
+    "column_break_1",
+    "established_year",
+    "total_capacity",
+    "findagrave_section",
+    "findagrave_id",
+    "column_break_fg",
+    "findagrave_url",
+    "location_section",
+    "address_line_1",
+    "city",
+    "county",
+    "column_break_loc",
+    "state",
+    "zip_code",
+    "gps_section",
+    "latitude",
+    "column_break_gps",
+    "longitude",
+    "contact_section",
+    "contact_name",
+    "contact_phone",
+    "column_break_contact",
+    "contact_email",
+    "sections_section",
+    "sections",
+    "notes_section",
+    "description",
+    "column_break_notes",
+    "image"
+  ],
+  "fields": [
+    {
+      "fieldname": "cemetery_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Cemetery Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "default": "Active",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Active\nInactive\nHistorical",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "established_year",
+      "fieldtype": "Int",
+      "label": "Established Year"
+    },
+    {
+      "fieldname": "total_capacity",
+      "fieldtype": "Int",
+      "label": "Total Capacity"
+    },
+    {
+      "fieldname": "findagrave_section",
+      "fieldtype": "Section Break",
+      "label": "FindAGrave"
+    },
+    {
+      "fieldname": "findagrave_id",
+      "fieldtype": "Data",
+      "label": "FindAGrave ID"
+    },
+    {
+      "fieldname": "column_break_fg",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "findagrave_url",
+      "fieldtype": "Data",
+      "label": "FindAGrave URL",
+      "options": "URL"
+    },
+    {
+      "fieldname": "location_section",
+      "fieldtype": "Section Break",
+      "label": "Location"
+    },
+    {
+      "fieldname": "address_line_1",
+      "fieldtype": "Data",
+      "label": "Address Line 1"
+    },
+    {
+      "fieldname": "city",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "City"
+    },
+    {
+      "fieldname": "county",
+      "fieldtype": "Data",
+      "label": "County"
+    },
+    {
+      "fieldname": "column_break_loc",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "state",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "State"
+    },
+    {
+      "fieldname": "zip_code",
+      "fieldtype": "Data",
+      "label": "Zip Code"
+    },
+    {
+      "fieldname": "gps_section",
+      "fieldtype": "Section Break",
+      "label": "GPS Coordinates"
+    },
+    {
+      "fieldname": "latitude",
+      "fieldtype": "Float",
+      "label": "Latitude"
+    },
+    {
+      "fieldname": "column_break_gps",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "longitude",
+      "fieldtype": "Float",
+      "label": "Longitude"
+    },
+    {
+      "fieldname": "contact_section",
+      "fieldtype": "Section Break",
+      "label": "Contact"
+    },
+    {
+      "fieldname": "contact_name",
+      "fieldtype": "Data",
+      "label": "Contact Name"
+    },
+    {
+      "fieldname": "contact_phone",
+      "fieldtype": "Data",
+      "label": "Contact Phone",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "column_break_contact",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "contact_email",
+      "fieldtype": "Data",
+      "label": "Contact Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "sections_section",
+      "fieldtype": "Section Break",
+      "label": "Cemetery Sections"
+    },
+    {
+      "fieldname": "sections",
+      "fieldtype": "Table",
+      "label": "Sections",
+      "options": "Cemetery Section"
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    },
+    {
+      "fieldname": "column_break_notes",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "image",
+      "fieldtype": "Attach Image",
+      "label": "Image"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-03-18 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Cemetery",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "role": "System Manager",
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

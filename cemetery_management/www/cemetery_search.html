@@ -1,0 +1,285 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<style>
+    .cemetery-search-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .cemetery-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 30px;
+        background: linear-gradient(135deg, #3a9e8a, #4ABFAB, #6BB8D4);
+        border-radius: 12px;
+        color: white;
+    }
+    .cemetery-header h1 {
+        margin: 0 0 8px 0;
+        font-size: 28px;
+        font-weight: 700;
+        color: white;
+    }
+    .cemetery-header p {
+        margin: 0;
+        opacity: 0.9;
+        font-size: 16px;
+    }
+    .search-form {
+        background: #F4F6F8;
+        padding: 24px;
+        border-radius: 10px;
+        margin-bottom: 24px;
+    }
+    .search-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: end;
+    }
+    .search-field {
+        flex: 1;
+        min-width: 180px;
+    }
+    .search-field label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #333;
+    }
+    .search-field input, .search-field select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+    .search-btn {
+        padding: 10px 24px;
+        background: #4ABFAB;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        min-width: 120px;
+    }
+    .search-btn:hover {
+        background: #3a9e8a;
+    }
+    .results-count {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 16px;
+    }
+    .burial-card {
+        display: flex;
+        gap: 16px;
+        padding: 16px;
+        background: white;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        transition: box-shadow 0.2s;
+    }
+    .burial-card:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .burial-photo {
+        width: 80px;
+        height: 80px;
+        border-radius: 6px;
+        object-fit: cover;
+        background: #EBF6FA;
+        flex-shrink: 0;
+    }
+    .burial-photo-placeholder {
+        width: 80px;
+        height: 80px;
+        border-radius: 6px;
+        background: #EBF6FA;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6BB8D4;
+        font-size: 28px;
+        flex-shrink: 0;
+    }
+    .burial-info {
+        flex: 1;
+    }
+    .burial-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 4px;
+    }
+    .burial-maiden {
+        font-size: 13px;
+        color: #888;
+        font-style: italic;
+    }
+    .burial-dates {
+        font-size: 14px;
+        color: #555;
+        margin-top: 4px;
+    }
+    .burial-meta {
+        display: flex;
+        gap: 16px;
+        margin-top: 6px;
+        font-size: 13px;
+        color: #777;
+    }
+    .veteran-badge {
+        display: inline-block;
+        background: #2d5016;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+    }
+    .findagrave-link {
+        color: #4ABFAB;
+        text-decoration: none;
+        font-size: 13px;
+    }
+    .findagrave-link:hover {
+        text-decoration: underline;
+    }
+    .no-results {
+        text-align: center;
+        padding: 40px;
+        color: #888;
+    }
+    @media (max-width: 600px) {
+        .search-row { flex-direction: column; }
+        .search-field { min-width: 100%; }
+        .burial-card { flex-direction: column; }
+    }
+</style>
+
+<div class="cemetery-search-container">
+    <div class="cemetery-header">
+        <h1>Pleasant Springs Cemetery</h1>
+        <p>Henderson, Tennessee &middot; Search burial records</p>
+    </div>
+
+    <div class="search-form">
+        <div class="search-row">
+            <div class="search-field" style="flex: 2;">
+                <label for="search-query">Search by Name</label>
+                <input type="text" id="search-query" placeholder="Enter name..." autofocus>
+            </div>
+            <div class="search-field">
+                <label for="death-year">Death Year</label>
+                <input type="number" id="death-year" placeholder="e.g. 1965" min="1700" max="2030">
+            </div>
+            <div class="search-field">
+                <label for="veteran-only">Veteran</label>
+                <select id="veteran-only">
+                    <option value="">All</option>
+                    <option value="1">Veterans Only</option>
+                </select>
+            </div>
+            <button class="search-btn" onclick="searchBurials()">Search</button>
+        </div>
+    </div>
+
+    <div id="results-count" class="results-count" style="display:none;"></div>
+    <div id="results-container"></div>
+</div>
+
+<script>
+    // Search on Enter key
+    document.getElementById('search-query').addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') searchBurials();
+    });
+
+    // Load all records on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        searchBurials();
+    });
+
+    function searchBurials() {
+        var query = document.getElementById('search-query').value;
+        var deathYear = document.getElementById('death-year').value;
+        var veteranOnly = document.getElementById('veteran-only').value;
+
+        frappe.call({
+            method: 'cemetery_management.www.cemetery_search.search_burials',
+            args: {
+                query: query,
+                death_year: deathYear,
+                veteran_only: veteranOnly
+            },
+            callback: function(r) {
+                renderResults(r.message || []);
+            }
+        });
+    }
+
+    function renderResults(records) {
+        var container = document.getElementById('results-container');
+        var countEl = document.getElementById('results-count');
+
+        countEl.style.display = 'block';
+        countEl.textContent = records.length + ' record' + (records.length !== 1 ? 's' : '') + ' found';
+
+        if (!records.length) {
+            container.innerHTML = '<div class="no-results">No burial records found matching your search.</div>';
+            return;
+        }
+
+        var html = '';
+        records.forEach(function(rec) {
+            var photoHtml = rec.primary_photo
+                ? '<img class="burial-photo" src="' + rec.primary_photo + '" alt="' + rec.full_name + '">'
+                : '<div class="burial-photo-placeholder">&#9768;</div>';
+
+            var dates = '';
+            if (rec.date_of_birth || rec.date_of_death) {
+                var birth = rec.date_of_birth ? formatDate(rec.date_of_birth) : '?';
+                var death = rec.date_of_death ? formatDate(rec.date_of_death) : '?';
+                dates = birth + ' &mdash; ' + death;
+                if (rec.age_at_death) dates += ' (' + rec.age_at_death + ')';
+            }
+
+            var maiden = rec.maiden_name ? '<span class="burial-maiden">n&eacute;e ' + rec.maiden_name + '</span>' : '';
+
+            var veteran = rec.is_veteran
+                ? '<span class="veteran-badge">' + (rec.military_branch || 'Veteran') + '</span>'
+                : '';
+
+            var fagLink = rec.findagrave_url
+                ? '<a href="' + rec.findagrave_url + '" target="_blank" class="findagrave-link">View on FindAGrave &rarr;</a>'
+                : '';
+
+            var plot = rec.burial_plot ? '<span>Plot: ' + rec.burial_plot + '</span>' : '';
+
+            html += '<div class="burial-card">'
+                + photoHtml
+                + '<div class="burial-info">'
+                + '<div class="burial-name">' + rec.full_name + ' ' + maiden + '</div>'
+                + '<div class="burial-dates">' + dates + '</div>'
+                + '<div class="burial-meta">'
+                + veteran + plot + fagLink
+                + '</div></div></div>';
+        });
+
+        container.innerHTML = html;
+    }
+
+    function formatDate(dateStr) {
+        if (!dateStr) return '?';
+        var d = new Date(dateStr + 'T00:00:00');
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    }
+</script>
+{% endblock %}

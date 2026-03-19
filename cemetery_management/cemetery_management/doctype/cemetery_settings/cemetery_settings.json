@@ -1,0 +1,125 @@
+{
+  "actions": [],
+  "creation": "2026-03-18 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "default_cemetery",
+    "default_company",
+    "column_break_1",
+    "default_interment_type",
+    "enable_public_search",
+    "perpetual_care_section",
+    "perpetual_care_percent",
+    "column_break_2",
+    "perpetual_care_account",
+    "findagrave_section",
+    "findagrave_cemetery_id",
+    "column_break_3",
+    "last_findagrave_import",
+    "import_count"
+  ],
+  "fields": [
+    {
+      "fieldname": "default_cemetery",
+      "fieldtype": "Link",
+      "label": "Default Cemetery",
+      "options": "Cemetery"
+    },
+    {
+      "fieldname": "default_company",
+      "fieldtype": "Link",
+      "label": "Default Company",
+      "options": "Company"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Burial",
+      "fieldname": "default_interment_type",
+      "fieldtype": "Select",
+      "label": "Default Interment Type",
+      "options": "\nBurial\nCremation\nEntombment"
+    },
+    {
+      "fieldname": "enable_public_search",
+      "fieldtype": "Check",
+      "label": "Enable Public Search"
+    },
+    {
+      "fieldname": "perpetual_care_section",
+      "fieldtype": "Section Break",
+      "label": "Perpetual Care"
+    },
+    {
+      "default": "10",
+      "description": "Tennessee standard for perpetual care fund",
+      "fieldname": "perpetual_care_percent",
+      "fieldtype": "Percent",
+      "label": "Perpetual Care Percent"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "perpetual_care_account",
+      "fieldtype": "Link",
+      "label": "Perpetual Care Account",
+      "options": "Account"
+    },
+    {
+      "fieldname": "findagrave_section",
+      "fieldtype": "Section Break",
+      "label": "FindAGrave Integration"
+    },
+    {
+      "default": "17250",
+      "fieldname": "findagrave_cemetery_id",
+      "fieldtype": "Data",
+      "label": "FindAGrave Cemetery ID"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "last_findagrave_import",
+      "fieldtype": "Datetime",
+      "label": "Last FindAGrave Import",
+      "read_only": 1
+    },
+    {
+      "fieldname": "import_count",
+      "fieldtype": "Int",
+      "label": "Import Count",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 0,
+  "issingle": 1,
+  "links": [],
+  "modified": "2026-03-18 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Cemetery Settings",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 0,
+      "cancel": 0,
+      "amend": 0
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

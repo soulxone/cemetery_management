@@ -1,0 +1,200 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-18 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "invoice_date",
+    "company",
+    "customer_section",
+    "customer_name",
+    "plot_owner",
+    "column_break_cust",
+    "burial_record",
+    "cemetery",
+    "services_section",
+    "services",
+    "totals_section",
+    "total_amount",
+    "payment_section",
+    "payment_method",
+    "payment_reference",
+    "column_break_pay",
+    "payment_status",
+    "accounting_section",
+    "journal_entry",
+    "notes_section",
+    "notes",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "default": "CSI-.YYYY.-.#####",
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "options": "CSI-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "invoice_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Invoice Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "customer_section",
+      "fieldtype": "Section Break",
+      "label": "Customer"
+    },
+    {
+      "bold": 1,
+      "fieldname": "customer_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Customer Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "plot_owner",
+      "fieldtype": "Link",
+      "label": "Plot Owner",
+      "options": "Plot Owner"
+    },
+    {
+      "fieldname": "column_break_cust",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "burial_record",
+      "fieldtype": "Link",
+      "label": "Burial Record",
+      "options": "Burial Record"
+    },
+    {
+      "fieldname": "cemetery",
+      "fieldtype": "Link",
+      "label": "Cemetery",
+      "options": "Cemetery"
+    },
+    {
+      "fieldname": "services_section",
+      "fieldtype": "Section Break",
+      "label": "Services"
+    },
+    {
+      "fieldname": "services",
+      "fieldtype": "Table",
+      "label": "Services",
+      "options": "Cemetery Service Item",
+      "reqd": 1
+    },
+    {
+      "fieldname": "totals_section",
+      "fieldtype": "Section Break"
+    },
+    {
+      "bold": 1,
+      "fieldname": "total_amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Total Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "payment_section",
+      "fieldtype": "Section Break",
+      "label": "Payment"
+    },
+    {
+      "fieldname": "payment_method",
+      "fieldtype": "Select",
+      "label": "Payment Method",
+      "options": "\nCash\nCheck\nCard\nBank Transfer\nOther"
+    },
+    {
+      "fieldname": "payment_reference",
+      "fieldtype": "Data",
+      "label": "Payment Reference"
+    },
+    {
+      "fieldname": "column_break_pay",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Unpaid",
+      "fieldname": "payment_status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Payment Status",
+      "options": "Unpaid\nPaid\nPartial"
+    },
+    {
+      "fieldname": "accounting_section",
+      "fieldtype": "Section Break",
+      "label": "Accounting"
+    },
+    {
+      "fieldname": "journal_entry",
+      "fieldtype": "Link",
+      "label": "Journal Entry",
+      "no_copy": 1,
+      "options": "Journal Entry",
+      "read_only": 1
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Cemetery Service Invoice",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-03-18 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Cemetery Service Invoice",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "amend": 1,
+      "cancel": 1,
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "role": "System Manager",
+      "submit": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "customer_name",
+  "track_changes": 1
+}

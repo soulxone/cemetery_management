@@ -1,0 +1,357 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "naming_series:",
+ "creation": "2026-03-18 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "deceased_section",
+  "first_name",
+  "middle_name",
+  "last_name",
+  "column_break_name",
+  "full_name",
+  "maiden_name",
+  "dates_section",
+  "gender",
+  "date_of_birth",
+  "column_break_dates",
+  "date_of_death",
+  "age_at_death",
+  "veteran_section",
+  "is_veteran",
+  "military_branch",
+  "column_break_vet",
+  "military_rank",
+  "military_war",
+  "interment_section",
+  "cemetery",
+  "burial_plot",
+  "interment_date",
+  "column_break_int",
+  "interment_type",
+  "container_type",
+  "depth",
+  "services_section",
+  "funeral_home",
+  "column_break_svc",
+  "officiant",
+  "church_section",
+  "church_member",
+  "column_break_church",
+  "is_church_member",
+  "findagrave_section",
+  "findagrave_memorial_id",
+  "findagrave_url",
+  "column_break_fag",
+  "findagrave_bio",
+  "photos_section",
+  "primary_photo",
+  "photos",
+  "notes_section",
+  "epitaph",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "BUR-.YYYY.-.#####",
+   "reqd": 1,
+   "default": "BUR-.YYYY.-.#####"
+  },
+  {
+   "fieldname": "deceased_section",
+   "fieldtype": "Section Break",
+   "label": "Deceased Information"
+  },
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "label": "First Name",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "middle_name",
+   "fieldtype": "Data",
+   "label": "Middle Name"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_name",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name",
+   "read_only": 1,
+   "in_list_view": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "maiden_name",
+   "fieldtype": "Data",
+   "label": "Maiden Name"
+  },
+  {
+   "fieldname": "dates_section",
+   "fieldtype": "Section Break",
+   "label": "Dates"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Link",
+   "label": "Gender",
+   "options": "Gender"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_dates",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_of_death",
+   "fieldtype": "Date",
+   "label": "Date of Death",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "age_at_death",
+   "fieldtype": "Data",
+   "label": "Age at Death",
+   "read_only": 1
+  },
+  {
+   "fieldname": "veteran_section",
+   "fieldtype": "Section Break",
+   "label": "Military Service",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "is_veteran",
+   "fieldtype": "Check",
+   "label": "Is Veteran"
+  },
+  {
+   "fieldname": "military_branch",
+   "fieldtype": "Select",
+   "label": "Military Branch",
+   "options": "\nArmy\nNavy\nMarine Corps\nAir Force\nCoast Guard\nSpace Force",
+   "depends_on": "eval:doc.is_veteran"
+  },
+  {
+   "fieldname": "column_break_vet",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "military_rank",
+   "fieldtype": "Data",
+   "label": "Military Rank",
+   "depends_on": "eval:doc.is_veteran"
+  },
+  {
+   "fieldname": "military_war",
+   "fieldtype": "Data",
+   "label": "Military War",
+   "depends_on": "eval:doc.is_veteran"
+  },
+  {
+   "fieldname": "interment_section",
+   "fieldtype": "Section Break",
+   "label": "Interment Details"
+  },
+  {
+   "fieldname": "cemetery",
+   "fieldtype": "Link",
+   "label": "Cemetery",
+   "options": "Cemetery",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "burial_plot",
+   "fieldtype": "Link",
+   "label": "Burial Plot",
+   "options": "Burial Plot"
+  },
+  {
+   "fieldname": "interment_date",
+   "fieldtype": "Date",
+   "label": "Interment Date"
+  },
+  {
+   "fieldname": "column_break_int",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "interment_type",
+   "fieldtype": "Select",
+   "label": "Interment Type",
+   "options": "\nBurial\nCremation\nEntombment\nGreen Burial",
+   "default": "Burial"
+  },
+  {
+   "fieldname": "container_type",
+   "fieldtype": "Select",
+   "label": "Container Type",
+   "options": "\nCasket\nUrn\nVault\nShroud\nOther"
+  },
+  {
+   "fieldname": "depth",
+   "fieldtype": "Select",
+   "label": "Depth",
+   "options": "\nStandard (6ft)\nDouble-Depth (10ft)\nCremation (3ft)\nInfant (4ft)"
+  },
+  {
+   "fieldname": "services_section",
+   "fieldtype": "Section Break",
+   "label": "Services"
+  },
+  {
+   "fieldname": "funeral_home",
+   "fieldtype": "Link",
+   "label": "Funeral Home",
+   "options": "Funeral Home"
+  },
+  {
+   "fieldname": "column_break_svc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "officiant",
+   "fieldtype": "Data",
+   "label": "Officiant"
+  },
+  {
+   "fieldname": "church_section",
+   "fieldtype": "Section Break",
+   "label": "Church Connection",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "church_member",
+   "fieldtype": "Link",
+   "label": "Church Member",
+   "options": "Church Member"
+  },
+  {
+   "fieldname": "column_break_church",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_church_member",
+   "fieldtype": "Check",
+   "label": "Is Church Member"
+  },
+  {
+   "fieldname": "findagrave_section",
+   "fieldtype": "Section Break",
+   "label": "FindAGrave",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "findagrave_memorial_id",
+   "fieldtype": "Data",
+   "label": "FindAGrave Memorial ID"
+  },
+  {
+   "fieldname": "findagrave_url",
+   "fieldtype": "Data",
+   "label": "FindAGrave URL",
+   "options": "URL"
+  },
+  {
+   "fieldname": "column_break_fag",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "findagrave_bio",
+   "fieldtype": "Text",
+   "label": "FindAGrave Bio"
+  },
+  {
+   "fieldname": "photos_section",
+   "fieldtype": "Section Break",
+   "label": "Photos"
+  },
+  {
+   "fieldname": "primary_photo",
+   "fieldtype": "Attach Image",
+   "label": "Primary Photo"
+  },
+  {
+   "fieldname": "photos",
+   "fieldtype": "Table",
+   "label": "Photos",
+   "options": "Burial Photo"
+  },
+  {
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "epitaph",
+   "fieldtype": "Small Text",
+   "label": "Epitaph"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Burial Record",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "is_tree": 0,
+ "links": [],
+ "modified": "2026-03-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cemetery Management",
+ "name": "Burial Record",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  }
+ ],
+ "search_fields": "full_name,maiden_name,findagrave_memorial_id",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "full_name",
+ "track_changes": 1
+}
