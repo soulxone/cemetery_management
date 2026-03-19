@@ -41,6 +41,102 @@ def enqueue_import(cemetery_name="Pleasant Springs Cemetery"):
 
 
 @frappe.whitelist()
+def enqueue_enrich():
+    """Enqueue enrichment of all burial records with FindAGrave detail pages."""
+    frappe.enqueue(
+        "cemetery_management.api.findagrave.enrich_all_records",
+        queue="long",
+        timeout=7200,
+    )
+    frappe.msgprint("Enrichment job queued. This will update names, dates, and photos from FindAGrave.")
+    return "Enrichment queued"
+
+
+def enrich_all_records():
+    """Fetch detail pages for all burial records that have a FindAGrave memorial ID."""
+    records = frappe.get_all(
+        "Burial Record",
+        filters={"findagrave_memorial_id": ["is", "set"]},
+        fields=["name", "findagrave_memorial_id", "first_name", "date_of_birth"],
+        order_by="name asc",
+        limit_page_length=0,
+    )
+
+    total = len(records)
+    updated = 0
+    errors = 0
+
+    frappe.publish_realtime("msgprint", f"Starting enrichment of {total} records...")
+
+    for idx, rec in enumerate(records, 1):
+        memorial_id = rec.findagrave_memorial_id
+
+        try:
+            detail = fetch_memorial_details(memorial_id)
+            if not detail:
+                continue
+
+            doc = frappe.get_doc("Burial Record", rec.name)
+            changed = False
+
+            # Update name if currently Unknown
+            if doc.first_name == "Unknown" and detail.get("first_name"):
+                doc.first_name = detail["first_name"]
+                doc.middle_name = detail.get("middle_name", "")
+                doc.last_name = detail.get("last_name", "") or "Unknown"
+                doc.maiden_name = detail.get("maiden_name", "")
+                changed = True
+
+            # Update dates if missing
+            if not doc.date_of_birth and detail.get("birth_date_raw"):
+                parsed = parse_date_string(detail["birth_date_raw"])
+                if parsed:
+                    doc.date_of_birth = parsed
+                    changed = True
+
+            if not doc.date_of_death and detail.get("death_date_raw"):
+                parsed = parse_date_string(detail["death_date_raw"])
+                if parsed:
+                    doc.date_of_death = parsed
+                    changed = True
+
+            # Update veteran info
+            if not doc.is_veteran and detail.get("is_veteran"):
+                doc.is_veteran = 1
+                doc.military_branch = detail.get("military_branch", "")
+                changed = True
+
+            # Update bio
+            if not doc.findagrave_bio and detail.get("bio"):
+                doc.findagrave_bio = detail["bio"]
+                changed = True
+
+            if changed:
+                doc.flags.ignore_mandatory = True
+                doc.save(ignore_permissions=True)
+                updated += 1
+
+            if idx % 25 == 0:
+                frappe.db.commit()
+                frappe.publish_realtime(
+                    "msgprint",
+                    f"Enrichment progress: {idx}/{total} (updated: {updated})"
+                )
+
+        except Exception as e:
+            errors += 1
+            frappe.log_error(f"Enrich error for {rec.name}: {e}", "FindAGrave Enrich")
+
+        time.sleep(1.5)  # Rate limit
+
+    frappe.db.commit()
+    frappe.publish_realtime(
+        "msgprint",
+        f"Enrichment complete! Updated: {updated}, Errors: {errors}, Total: {total}"
+    )
+
+
+@frappe.whitelist()
 def import_memorials(cemetery_name="Pleasant Springs Cemetery", dry_run=False):
     """Main entry point: import all FindAGrave memorials for a cemetery.
 
