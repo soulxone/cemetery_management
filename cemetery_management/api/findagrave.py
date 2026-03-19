@@ -26,6 +26,7 @@ HEADERS = {
 }
 
 
+@frappe.whitelist()
 def import_memorials(cemetery_name="Pleasant Springs Cemetery", dry_run=False):
     """Main entry point: import all FindAGrave memorials for a cemetery.
 
