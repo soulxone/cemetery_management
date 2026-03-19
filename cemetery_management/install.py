@@ -226,7 +226,7 @@ def create_desktop_icon():
         doc.link_to = "Cemetery Management"
         doc.icon = "map-pin"
         doc.app = "cemetery_management"
-        doc.bg_color = "green"
+        doc.bg_color = "gray"
         doc.hidden = 0
         doc.insert(ignore_permissions=True)
         frappe.db.commit()
