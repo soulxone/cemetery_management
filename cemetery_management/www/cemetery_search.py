@@ -31,8 +31,7 @@ def search_burials(query="", birth_year="", death_year="", veteran_only=""):
     if birth_year:
         try:
             year = int(birth_year)
-            filters["date_of_birth"] = [">=", f"{year}-01-01"]
-            filters["date_of_birth"] = ["<=", f"{year}-12-31"]
+            filters["date_of_birth"] = ["between", [f"{year}-01-01", f"{year}-12-31"]]
         except ValueError:
             pass
 

@@ -345,7 +345,10 @@
    "delete": 1,
    "submit": 1,
    "cancel": 1,
-   "amend": 1
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1
   }
  ],
  "search_fields": "full_name,maiden_name,findagrave_memorial_id",
