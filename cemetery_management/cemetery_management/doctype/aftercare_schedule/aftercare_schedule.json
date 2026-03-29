@@ -1,0 +1,155 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-29 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "burial_record",
+    "deceased_name",
+    "column_break_1",
+    "schedule_type",
+    "scheduled_date",
+    "contacts_section",
+    "family_group",
+    "column_break_contact",
+    "plot_owner",
+    "completion_section",
+    "completed",
+    "column_break_comp",
+    "completed_date",
+    "completed_by",
+    "notes_section",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "default": "ACS-.YYYY.-.#####",
+      "options": "ACS-.YYYY.-.#####",
+      "reqd": 1,
+      "no_copy": 1,
+      "print_hide": 1
+    },
+    {
+      "fieldname": "burial_record",
+      "fieldtype": "Link",
+      "label": "Burial Record",
+      "options": "Burial Record",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fetch_from": "burial_record.full_name",
+      "fieldname": "deceased_name",
+      "fieldtype": "Data",
+      "label": "Deceased Name",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "schedule_type",
+      "fieldtype": "Select",
+      "label": "Schedule Type",
+      "options": "30-Day\n6-Month\nAnniversary",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "scheduled_date",
+      "fieldtype": "Date",
+      "label": "Scheduled Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "contacts_section",
+      "fieldtype": "Section Break",
+      "label": "Contacts"
+    },
+    {
+      "fieldname": "family_group",
+      "fieldtype": "Link",
+      "label": "Family Group",
+      "options": "Family Group"
+    },
+    {
+      "fieldname": "column_break_contact",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "plot_owner",
+      "fieldtype": "Link",
+      "label": "Plot Owner",
+      "options": "Plot Owner"
+    },
+    {
+      "fieldname": "completion_section",
+      "fieldtype": "Section Break",
+      "label": "Completion"
+    },
+    {
+      "default": "0",
+      "fieldname": "completed",
+      "fieldtype": "Check",
+      "label": "Completed",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_comp",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "completed_date",
+      "fieldtype": "Date",
+      "label": "Completed Date"
+    },
+    {
+      "fieldname": "completed_by",
+      "fieldtype": "Link",
+      "label": "Completed By",
+      "options": "User"
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Aftercare Schedule",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

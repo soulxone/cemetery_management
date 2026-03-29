@@ -22,6 +22,8 @@
   "latitude",
   "column_break_gps",
   "longitude",
+  "capture_gps",
+  "qr_code_image",
   "monument_section",
   "has_monument",
   "monument_type",
@@ -141,6 +143,18 @@
    "fieldname": "longitude",
    "fieldtype": "Float",
    "label": "Longitude"
+  },
+  {
+   "fieldname": "capture_gps",
+   "fieldtype": "Button",
+   "label": "Capture GPS from Device",
+   "description": "Uses your device's GPS to set latitude and longitude"
+  },
+  {
+   "fieldname": "qr_code_image",
+   "fieldtype": "Attach Image",
+   "label": "QR Code",
+   "read_only": 1
   },
   {
    "fieldname": "monument_section",

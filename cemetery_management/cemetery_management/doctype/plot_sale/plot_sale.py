@@ -22,6 +22,7 @@ class PlotSale(Document):
 		self.create_journal_entry()
 		if flt(self.perpetual_care_amount) > 0:
 			self.create_perpetual_care_entry()
+			self.create_trust_transaction()
 		self.update_plot_status()
 
 	def on_cancel(self):
@@ -81,6 +82,34 @@ class PlotSale(Document):
 		je.submit()
 
 		self.db_set("perpetual_care_journal_entry", je.name)
+
+	def create_trust_transaction(self):
+		"""Auto-create a Trust Transaction if a default trust is configured."""
+		settings = frappe.get_single("Cemetery Settings")
+		if not settings.default_perpetual_care_trust:
+			return
+
+		# Check the trust exists and is submitted
+		if not frappe.db.exists("Perpetual Care Trust", settings.default_perpetual_care_trust):
+			return
+
+		trust_docstatus = frappe.db.get_value(
+			"Perpetual Care Trust", settings.default_perpetual_care_trust, "docstatus"
+		)
+		if trust_docstatus != 1:
+			return
+
+		txn = frappe.new_doc("Trust Transaction")
+		txn.transaction_date = self.sale_date
+		txn.perpetual_care_trust = settings.default_perpetual_care_trust
+		txn.transaction_type = "Contribution"
+		txn.amount = flt(self.perpetual_care_amount)
+		txn.company = self.company
+		txn.reference_doctype = "Plot Sale"
+		txn.reference_name = self.name
+		txn.description = f"Perpetual care from Plot Sale {self.name} - {self.buyer_name}"
+		txn.insert(ignore_permissions=True)
+		txn.submit()
 
 	def cancel_journal_entries(self):
 		for field in ["journal_entry", "perpetual_care_journal_entry"]:

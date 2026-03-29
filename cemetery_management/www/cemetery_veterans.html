@@ -1,0 +1,179 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<style>
+    .veterans-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .veterans-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 30px 20px;
+        background: linear-gradient(135deg, #2d5016, #3a6b1e, #4A7C59);
+        border-radius: 12px;
+        color: white;
+    }
+    .veterans-header h1 {
+        margin: 0 0 8px 0;
+        font-size: 28px;
+        font-weight: 700;
+        color: white;
+    }
+    .veterans-header p {
+        margin: 0;
+        opacity: 0.9;
+        font-size: 16px;
+    }
+    .veterans-count {
+        font-size: 14px;
+        color: #666;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .branch-section {
+        margin-bottom: 24px;
+    }
+    .branch-header {
+        font-size: 20px;
+        font-weight: 600;
+        color: #2d5016;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #d4edda;
+        margin-bottom: 12px;
+    }
+    .veteran-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 12px;
+    }
+    .veteran-card {
+        display: flex;
+        gap: 12px;
+        padding: 12px;
+        background: white;
+        border: 1px solid #e8e8e8;
+        border-left: 4px solid #2d5016;
+        border-radius: 6px;
+        text-decoration: none;
+        color: inherit;
+        transition: box-shadow 0.2s;
+    }
+    .veteran-card:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        text-decoration: none;
+        color: inherit;
+    }
+    .veteran-photo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+    .veteran-photo-placeholder {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #d4edda;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #2d5016;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+    .veteran-info {
+        flex: 1;
+    }
+    .veteran-name {
+        font-weight: 600;
+        font-size: 15px;
+        color: #333;
+    }
+    .veteran-rank {
+        font-size: 12px;
+        color: #666;
+    }
+    .veteran-dates {
+        font-size: 12px;
+        color: #888;
+        margin-top: 2px;
+    }
+    .veteran-war {
+        display: inline-block;
+        background: #2d5016;
+        color: white;
+        padding: 1px 6px;
+        border-radius: 3px;
+        font-size: 10px;
+        font-weight: 600;
+        margin-top: 3px;
+    }
+    .nav-links {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+    .nav-links a {
+        color: #4ABFAB;
+        text-decoration: none;
+        margin: 0 12px;
+    }
+    .nav-links a:hover {
+        text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+        .veteran-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="veterans-container">
+    <div class="veterans-header">
+        <h1>Veterans Honor Roll</h1>
+        <p>Pleasant Springs Cemetery &middot; Henderson, Tennessee</p>
+    </div>
+
+    <div class="veterans-count">
+        {{ total_veterans }} veteran{{ "s" if total_veterans != 1 else "" }} interred
+    </div>
+
+    {% for branch, veterans in branches.items() %}
+    <div class="branch-section">
+        <div class="branch-header">{{ branch }} ({{ veterans | length }})</div>
+        <div class="veteran-grid">
+            {% for v in veterans %}
+            <a class="veteran-card" href="/memorial/{{ v.name }}">
+                {% if v.primary_photo %}
+                <img class="veteran-photo" src="{{ v.primary_photo }}" alt="{{ v.full_name }}">
+                {% else %}
+                <div class="veteran-photo-placeholder">&#9733;</div>
+                {% endif %}
+                <div class="veteran-info">
+                    <div class="veteran-name">{{ v.full_name }}</div>
+                    {% if v.military_rank %}
+                    <div class="veteran-rank">{{ v.military_rank }}</div>
+                    {% endif %}
+                    <div class="veteran-dates">
+                        {{ v.date_of_birth or "?" }} &mdash; {{ v.date_of_death or "?" }}
+                    </div>
+                    {% if v.military_war %}
+                    <span class="veteran-war">{{ v.military_war }}</span>
+                    {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="nav-links">
+        <a href="/cemetery-search">&larr; Search Records</a>
+        <a href="/cemetery-map">View Map</a>
+    </div>
+</div>
+{% endblock %}

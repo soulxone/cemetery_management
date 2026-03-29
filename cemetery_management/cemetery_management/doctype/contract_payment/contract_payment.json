@@ -1,0 +1,166 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-29 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "is_submittable": 1,
+  "field_order": [
+    "naming_series",
+    "payment_date",
+    "company",
+    "column_break_header",
+    "pre_need_contract",
+    "buyer_name",
+    "financial_section",
+    "amount",
+    "column_break_fin",
+    "payment_method",
+    "payment_reference",
+    "receipt_number",
+    "accounting_section",
+    "journal_entry",
+    "notes_section",
+    "notes",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "default": "CPY-.YYYY.-.#####",
+      "options": "CPY-.YYYY.-.#####",
+      "reqd": 1,
+      "no_copy": 1,
+      "print_hide": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "payment_date",
+      "fieldtype": "Date",
+      "label": "Payment Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_header",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "pre_need_contract",
+      "fieldtype": "Link",
+      "label": "Pre-Need Contract",
+      "options": "Pre-Need Contract",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fetch_from": "pre_need_contract.buyer_name",
+      "fieldname": "buyer_name",
+      "fieldtype": "Data",
+      "label": "Buyer Name",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "financial_section",
+      "fieldtype": "Section Break",
+      "label": "Payment Details"
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "label": "Amount",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_fin",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payment_method",
+      "fieldtype": "Select",
+      "label": "Payment Method",
+      "options": "\nCash\nCheck\nCard\nBank Transfer\nOther"
+    },
+    {
+      "fieldname": "payment_reference",
+      "fieldtype": "Data",
+      "label": "Payment Reference"
+    },
+    {
+      "fieldname": "receipt_number",
+      "fieldtype": "Data",
+      "label": "Receipt Number"
+    },
+    {
+      "fieldname": "accounting_section",
+      "fieldtype": "Section Break",
+      "label": "Accounting",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "journal_entry",
+      "fieldtype": "Link",
+      "label": "Journal Entry",
+      "options": "Journal Entry",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Contract Payment",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Contract Payment",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "amend": 1,
+      "cancel": 1,
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "submit": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

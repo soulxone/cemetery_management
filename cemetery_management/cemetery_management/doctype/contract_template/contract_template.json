@@ -1,0 +1,79 @@
+{
+  "actions": [],
+  "autoname": "field:template_name",
+  "creation": "2026-03-29 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "template_name",
+    "template_type",
+    "column_break_1",
+    "is_active",
+    "template_section",
+    "template_html"
+  ],
+  "fields": [
+    {
+      "fieldname": "template_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Template Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "template_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Template Type",
+      "options": "Pre-Need\nAt-Need\nService Agreement\nDeed\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Is Active"
+    },
+    {
+      "fieldname": "template_section",
+      "fieldtype": "Section Break",
+      "label": "Template Content"
+    },
+    {
+      "fieldname": "template_html",
+      "fieldtype": "Code",
+      "label": "Template HTML",
+      "options": "HTML",
+      "description": "Jinja template. Use {{ doc.field_name }} for dynamic values."
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Contract Template",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

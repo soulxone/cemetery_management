@@ -1,0 +1,22 @@
+{
+  "aggregate_function_based_on": "",
+  "color": "#3498db",
+  "creation": "2026-03-29 12:00:00.000000",
+  "docstatus": 0,
+  "doctype": "Number Card",
+  "document_type": "Pre-Need Contract",
+  "dynamic_filters_json": "[]",
+  "filters_json": "[[\"Pre-Need Contract\",\"docstatus\",\"=\",\"1\"],[\"Pre-Need Contract\",\"contract_status\",\"=\",\"Active\"]]",
+  "function": "Count",
+  "is_public": 1,
+  "is_standard": 1,
+  "label": "Active Pre-Need Contracts",
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Pre-Need Active",
+  "owner": "Administrator",
+  "show_percentage_stats": 1,
+  "stats_time_interval": "Monthly",
+  "type": "Document Type"
+}

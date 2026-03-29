@@ -1,0 +1,134 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-29 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "is_submittable": 1,
+  "title_field": "deceased_name",
+  "show_title_field_in_link": 1,
+  "field_order": [
+    "naming_series",
+    "deceased_name",
+    "status",
+    "column_break_1",
+    "burial_record",
+    "funeral_home",
+    "received_date",
+    "custody_section",
+    "custody_log",
+    "notes_section",
+    "notes",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "default": "RMT-.YYYY.-.#####",
+      "options": "RMT-.YYYY.-.#####",
+      "reqd": 1,
+      "no_copy": 1,
+      "print_hide": 1
+    },
+    {
+      "bold": 1,
+      "fieldname": "deceased_name",
+      "fieldtype": "Data",
+      "label": "Deceased Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Received\nIn Storage\nReleased\nInterred",
+      "default": "Received",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "burial_record",
+      "fieldtype": "Link",
+      "label": "Burial Record",
+      "options": "Burial Record"
+    },
+    {
+      "fieldname": "funeral_home",
+      "fieldtype": "Link",
+      "label": "Funeral Home",
+      "options": "Funeral Home",
+      "in_list_view": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "received_date",
+      "fieldtype": "Date",
+      "label": "Received Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "custody_section",
+      "fieldtype": "Section Break",
+      "label": "Chain of Custody"
+    },
+    {
+      "fieldname": "custody_log",
+      "fieldtype": "Table",
+      "label": "Custody Log",
+      "options": "Custody Log Entry"
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Remains Tracking",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Remains Tracking",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "amend": 1,
+      "cancel": 1,
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "submit": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

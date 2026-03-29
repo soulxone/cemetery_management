@@ -1,0 +1,298 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+<style>
+    .cemetery-map-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .cemetery-header {
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 24px;
+        background: linear-gradient(135deg, #3a9e8a, #4ABFAB, #6BB8D4);
+        border-radius: 12px;
+        color: white;
+    }
+    .cemetery-header h1 {
+        margin: 0 0 6px 0;
+        font-size: 26px;
+        font-weight: 700;
+        color: white;
+    }
+    .cemetery-header p {
+        margin: 0;
+        opacity: 0.9;
+        font-size: 15px;
+    }
+    .map-toolbar {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .map-toolbar select {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 13px;
+    }
+    .map-stats {
+        margin-left: auto;
+        font-size: 13px;
+        color: #666;
+    }
+    #cemetery-map {
+        width: 100%;
+        height: 600px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+    }
+    .map-legend {
+        background: white;
+        padding: 10px 14px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .map-legend h4 {
+        margin: 0 0 6px 0;
+        font-size: 13px;
+        font-weight: 600;
+    }
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .legend-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid rgba(0,0,0,0.3);
+    }
+    .plot-popup .popup-name {
+        font-weight: 600;
+        font-size: 15px;
+        margin-bottom: 4px;
+    }
+    .plot-popup .popup-dates {
+        color: #555;
+        font-size: 13px;
+    }
+    .plot-popup .popup-plot {
+        font-size: 12px;
+        color: #888;
+        margin-top: 4px;
+    }
+    .plot-popup .popup-veteran {
+        display: inline-block;
+        background: #2d5016;
+        color: white;
+        padding: 1px 6px;
+        border-radius: 3px;
+        font-size: 10px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+    .plot-popup .popup-link {
+        display: block;
+        margin-top: 6px;
+        color: #4ABFAB;
+        text-decoration: none;
+        font-size: 12px;
+    }
+    .nav-links {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 14px;
+    }
+    .nav-links a {
+        color: #4ABFAB;
+        text-decoration: none;
+        margin: 0 12px;
+    }
+    .nav-links a:hover {
+        text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+        .cemetery-map-container { padding: 10px; }
+        #cemetery-map { height: 400px; }
+        .map-toolbar { flex-direction: column; }
+        .map-stats { margin-left: 0; }
+    }
+</style>
+
+<div class="cemetery-map-container">
+    <div class="cemetery-header">
+        <h1>{{ cemetery.cemetery_name if cemetery else "Cemetery Map" }}</h1>
+        <p>{{ cemetery.city if cemetery else "" }}, {{ cemetery.state if cemetery else "" }} &middot; Interactive Plot Map</p>
+    </div>
+
+    <div class="map-toolbar">
+        <select id="filter-status" onchange="filterMarkers()">
+            <option value="">All Statuses</option>
+            <option value="Available">Available</option>
+            <option value="Occupied">Occupied</option>
+            <option value="Reserved">Reserved</option>
+            <option value="Pre-Need">Pre-Need</option>
+            <option value="Unavailable">Unavailable</option>
+        </select>
+        <select id="filter-type" onchange="filterMarkers()">
+            <option value="">All Types</option>
+            <option value="Standard">Standard</option>
+            <option value="Companion">Companion</option>
+            <option value="Family">Family</option>
+            <option value="Cremation">Cremation</option>
+            <option value="Veteran">Veteran</option>
+            <option value="Infant">Infant</option>
+        </select>
+        <span class="map-stats" id="map-stats"></span>
+    </div>
+
+    <div id="cemetery-map"></div>
+
+    <div class="nav-links">
+        <a href="/cemetery-search">&larr; Search Records</a>
+    </div>
+</div>
+
+<script>
+    var map, allMarkers = [], markerLayer;
+
+    var STATUS_COLORS = {
+        'Available': '#2ecc71',
+        'Occupied': '#e74c3c',
+        'Reserved': '#f1c40f',
+        'Pre-Need': '#3498db',
+        'Unavailable': '#95a5a6'
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        initMap();
+        loadMarkers();
+    });
+
+    function initMap() {
+        map = L.map('cemetery-map').setView([{{ center_lat }}, {{ center_lng }}], 17);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors',
+            maxZoom: 22
+        }).addTo(map);
+
+        markerLayer = L.layerGroup().addTo(map);
+
+        // Add legend
+        var legend = L.control({position: 'bottomright'});
+        legend.onAdd = function() {
+            var div = L.DomUtil.create('div', 'map-legend');
+            div.innerHTML = '<h4>Plot Status</h4>'
+                + legendItem('#2ecc71', 'Available')
+                + legendItem('#e74c3c', 'Occupied')
+                + legendItem('#f1c40f', 'Reserved')
+                + legendItem('#3498db', 'Pre-Need')
+                + legendItem('#95a5a6', 'Unavailable');
+            return div;
+        };
+        legend.addTo(map);
+    }
+
+    function legendItem(color, label) {
+        return '<div class="legend-item"><div class="legend-dot" style="background:' + color + '"></div>' + label + '</div>';
+    }
+
+    function loadMarkers() {
+        frappe.call({
+            method: 'cemetery_management.www.cemetery_map.get_plot_markers',
+            callback: function(r) {
+                allMarkers = r.message || [];
+                renderMarkers(allMarkers);
+            }
+        });
+    }
+
+    function renderMarkers(plots) {
+        markerLayer.clearLayers();
+        var count = 0;
+
+        plots.forEach(function(plot) {
+            var color = STATUS_COLORS[plot.status] || '#95a5a6';
+            var marker = L.circleMarker([plot.latitude, plot.longitude], {
+                radius: 7,
+                fillColor: color,
+                color: '#333',
+                weight: 1,
+                opacity: 0.8,
+                fillOpacity: 0.8
+            });
+
+            marker.plotData = plot;
+            marker.bindPopup(buildPopup(plot));
+            markerLayer.addLayer(marker);
+            count++;
+        });
+
+        document.getElementById('map-stats').textContent = count + ' plots mapped';
+
+        // Fit bounds if we have markers
+        if (count > 1) {
+            var coords = plots.map(function(p) { return [p.latitude, p.longitude]; });
+            map.fitBounds(coords, { padding: [30, 30] });
+        }
+    }
+
+    function buildPopup(plot) {
+        var html = '<div class="plot-popup">';
+        html += '<div class="popup-plot"><strong>' + plot.name + '</strong></div>';
+        html += '<div style="font-size:12px;color:#888;">'
+            + 'Section: ' + (plot.section || '-') + ' | Row: ' + (plot.row || '-')
+            + ' | Plot: ' + (plot.plot_number || '-') + '</div>';
+        html += '<div style="font-size:12px;margin-top:2px;">Status: <strong>' + plot.status + '</strong>'
+            + ' | Type: ' + (plot.plot_type || '-') + '</div>';
+
+        if (plot.plot_owner_name) {
+            html += '<div style="font-size:12px;margin-top:2px;">Owner: ' + plot.plot_owner_name + '</div>';
+        }
+
+        if (plot.burials && plot.burials.length) {
+            html += '<hr style="margin:6px 0;border:none;border-top:1px solid #eee;">';
+            plot.burials.forEach(function(b) {
+                html += '<div class="popup-name">' + b.full_name + '</div>';
+                var dates = '';
+                if (b.date_of_birth || b.date_of_death) {
+                    dates = (b.date_of_birth || '?') + ' \u2014 ' + (b.date_of_death || '?');
+                }
+                if (dates) html += '<div class="popup-dates">' + dates + '</div>';
+                if (b.is_veteran) {
+                    html += '<span class="popup-veteran">' + (b.military_branch || 'Veteran') + '</span>';
+                }
+                html += '<a class="popup-link" href="/memorial/' + b.name + '">View Memorial &rarr;</a>';
+            });
+        }
+
+        html += '</div>';
+        return html;
+    }
+
+    function filterMarkers() {
+        var statusFilter = document.getElementById('filter-status').value;
+        var typeFilter = document.getElementById('filter-type').value;
+
+        var filtered = allMarkers.filter(function(p) {
+            if (statusFilter && p.status !== statusFilter) return false;
+            if (typeFilter && p.plot_type !== typeFilter) return false;
+            return true;
+        });
+
+        renderMarkers(filtered);
+    }
+</script>
+{% endblock %}

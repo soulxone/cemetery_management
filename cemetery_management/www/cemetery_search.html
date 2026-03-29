@@ -157,6 +157,68 @@
         padding: 40px;
         color: #888;
     }
+    .memorial-link {
+        color: #4ABFAB;
+        text-decoration: none;
+        font-size: 13px;
+    }
+    .memorial-link:hover {
+        text-decoration: underline;
+    }
+    .recent-section {
+        margin-bottom: 24px;
+    }
+    .recent-section h3 {
+        font-size: 16px;
+        color: #333;
+        margin: 0 0 12px 0;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #EBF6FA;
+    }
+    .recent-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 10px;
+    }
+    .recent-card {
+        background: white;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
+        padding: 12px;
+        text-align: center;
+        text-decoration: none;
+        color: inherit;
+        transition: box-shadow 0.2s;
+        display: block;
+    }
+    .recent-card:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        text-decoration: none;
+        color: inherit;
+    }
+    .recent-card .recent-name {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+    }
+    .recent-card .recent-date {
+        font-size: 12px;
+        color: #888;
+        margin-top: 4px;
+    }
+    .nav-links {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+    .nav-links a {
+        color: #4ABFAB;
+        text-decoration: none;
+        margin: 0 12px;
+    }
+    .nav-links a:hover {
+        text-decoration: underline;
+    }
     @media (max-width: 600px) {
         .search-row { flex-direction: column; }
         .search-field { min-width: 100%; }
@@ -191,8 +253,17 @@
         </div>
     </div>
 
+    <div id="recent-interments" class="recent-section" style="display:none;">
+        <h3>Recent Interments</h3>
+        <div id="recent-grid" class="recent-grid"></div>
+    </div>
+
     <div id="results-count" class="results-count" style="display:none;"></div>
     <div id="results-container"></div>
+
+    <div class="nav-links">
+        <a href="/cemetery-map">View Cemetery Map</a>
+    </div>
 </div>
 
 <script>
@@ -201,10 +272,35 @@
         if (e.key === 'Enter') searchBurials();
     });
 
-    // Load all records on page load
+    // Load all records and recent interments on page load
     document.addEventListener('DOMContentLoaded', function() {
         searchBurials();
+        loadRecentInterments();
     });
+
+    function loadRecentInterments() {
+        frappe.call({
+            method: 'cemetery_management.www.cemetery_search.get_recent_interments',
+            callback: function(r) {
+                var records = r.message || [];
+                if (!records.length) return;
+                var container = document.getElementById('recent-grid');
+                var section = document.getElementById('recent-interments');
+                section.style.display = 'block';
+                var html = '';
+                records.forEach(function(rec) {
+                    var death = rec.date_of_death ? formatDate(rec.date_of_death) : '';
+                    var vet = rec.is_veteran ? '<span class="veteran-badge" style="font-size:10px;margin-top:4px;display:inline-block;">' + (rec.military_branch || 'Veteran') + '</span>' : '';
+                    html += '<a class="recent-card" href="/memorial/' + rec.name + '">'
+                        + '<div class="recent-name">' + rec.full_name + '</div>'
+                        + '<div class="recent-date">' + death + '</div>'
+                        + vet
+                        + '</a>';
+                });
+                container.innerHTML = html;
+            }
+        });
+    }
 
     function searchBurials() {
         var query = document.getElementById('search-query').value;
@@ -262,13 +358,15 @@
 
             var plot = rec.burial_plot ? '<span>Plot: ' + rec.burial_plot + '</span>' : '';
 
+            var memorialLink = '<a href="/memorial/' + rec.name + '" class="memorial-link">View Memorial &rarr;</a>';
+
             html += '<div class="burial-card">'
                 + photoHtml
                 + '<div class="burial-info">'
                 + '<div class="burial-name">' + rec.full_name + ' ' + maiden + '</div>'
                 + '<div class="burial-dates">' + dates + '</div>'
                 + '<div class="burial-meta">'
-                + veteran + plot + fagLink
+                + veteran + plot + fagLink + memorialLink
                 + '</div></div></div>';
         });
 

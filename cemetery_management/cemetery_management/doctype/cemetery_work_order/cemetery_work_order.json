@@ -1,0 +1,246 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-29 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "is_submittable": 1,
+  "title_field": "title",
+  "show_title_field_in_link": 1,
+  "field_order": [
+    "naming_series",
+    "title",
+    "work_order_type",
+    "priority",
+    "column_break_header",
+    "status",
+    "assigned_to",
+    "company",
+    "schedule_section",
+    "scheduled_date",
+    "scheduled_time",
+    "column_break_schedule",
+    "completion_date",
+    "completion_time",
+    "references_section",
+    "cemetery",
+    "burial_plot",
+    "column_break_refs",
+    "burial_record",
+    "funeral_home",
+    "checklist_section",
+    "checklist_items",
+    "documentation_section",
+    "description",
+    "photos",
+    "notes_section",
+    "notes",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "default": "CWO-.YYYY.-.#####",
+      "options": "CWO-.YYYY.-.#####",
+      "reqd": 1,
+      "no_copy": 1,
+      "print_hide": 1
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Title",
+      "bold": 1,
+      "in_list_view": 1,
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "work_order_type",
+      "fieldtype": "Select",
+      "label": "Work Order Type",
+      "options": "\nInterment\nMaintenance\nMonument Setting\nGrave Preparation\nLandscaping\nRepair\nExhumation\nCleanup",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "label": "Priority",
+      "options": "Low\nMedium\nHigh\nUrgent",
+      "default": "Medium",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_header",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Open\nIn Progress\nCompleted\nCancelled",
+      "default": "Open",
+      "in_list_view": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "assigned_to",
+      "fieldtype": "Link",
+      "label": "Assigned To",
+      "options": "User"
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "schedule_section",
+      "fieldtype": "Section Break",
+      "label": "Schedule"
+    },
+    {
+      "fieldname": "scheduled_date",
+      "fieldtype": "Date",
+      "label": "Scheduled Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "scheduled_time",
+      "fieldtype": "Time",
+      "label": "Scheduled Time"
+    },
+    {
+      "fieldname": "column_break_schedule",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "completion_date",
+      "fieldtype": "Date",
+      "label": "Completion Date",
+      "no_copy": 1
+    },
+    {
+      "fieldname": "completion_time",
+      "fieldtype": "Time",
+      "label": "Completion Time",
+      "no_copy": 1
+    },
+    {
+      "fieldname": "references_section",
+      "fieldtype": "Section Break",
+      "label": "References"
+    },
+    {
+      "fieldname": "cemetery",
+      "fieldtype": "Link",
+      "label": "Cemetery",
+      "options": "Cemetery",
+      "reqd": 1
+    },
+    {
+      "fieldname": "burial_plot",
+      "fieldtype": "Link",
+      "label": "Burial Plot",
+      "options": "Burial Plot"
+    },
+    {
+      "fieldname": "column_break_refs",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "burial_record",
+      "fieldtype": "Link",
+      "label": "Burial Record",
+      "options": "Burial Record",
+      "depends_on": "eval:doc.work_order_type=='Interment' || doc.work_order_type=='Exhumation'"
+    },
+    {
+      "fieldname": "funeral_home",
+      "fieldtype": "Link",
+      "label": "Funeral Home",
+      "options": "Funeral Home",
+      "depends_on": "eval:doc.work_order_type=='Interment'"
+    },
+    {
+      "fieldname": "checklist_section",
+      "fieldtype": "Section Break",
+      "label": "Checklist"
+    },
+    {
+      "fieldname": "checklist_items",
+      "fieldtype": "Table",
+      "label": "Checklist Items",
+      "options": "Work Order Item"
+    },
+    {
+      "fieldname": "documentation_section",
+      "fieldtype": "Section Break",
+      "label": "Documentation",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    },
+    {
+      "fieldname": "photos",
+      "fieldtype": "Table",
+      "label": "Photos",
+      "options": "Burial Photo"
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Cemetery Work Order",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Cemetery Work Order",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "amend": 1,
+      "cancel": 1,
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "submit": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

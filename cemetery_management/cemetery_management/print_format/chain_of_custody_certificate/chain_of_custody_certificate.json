@@ -1,0 +1,17 @@
+{
+  "align_labels_right": 0,
+  "creation": "2026-03-29 12:00:00.000000",
+  "custom_format": 1,
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "doc_type": "Remains Tracking",
+  "font_size": 12,
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Chain of Custody Certificate",
+  "owner": "Administrator",
+  "print_format_type": "Jinja",
+  "show_section_headings": 1,
+  "standard": "Yes"
+}

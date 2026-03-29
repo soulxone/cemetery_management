@@ -17,7 +17,14 @@
     "findagrave_cemetery_id",
     "column_break_3",
     "last_findagrave_import",
-    "import_count"
+    "import_count",
+    "trust_fund_section",
+    "default_perpetual_care_trust",
+    "pre_need_section",
+    "default_price_list",
+    "default_payment_frequency",
+    "column_break_preneed",
+    "pre_need_deferred_revenue_account"
   ],
   "fields": [
     {
@@ -96,6 +103,47 @@
       "fieldtype": "Int",
       "label": "Import Count",
       "read_only": 1
+    },
+    {
+      "fieldname": "trust_fund_section",
+      "fieldtype": "Section Break",
+      "label": "Trust Fund"
+    },
+    {
+      "fieldname": "default_perpetual_care_trust",
+      "fieldtype": "Link",
+      "label": "Default Perpetual Care Trust",
+      "options": "Perpetual Care Trust",
+      "description": "If set, Plot Sales will auto-create Trust Transactions for perpetual care contributions"
+    },
+    {
+      "fieldname": "pre_need_section",
+      "fieldtype": "Section Break",
+      "label": "Pre-Need Settings"
+    },
+    {
+      "fieldname": "default_price_list",
+      "fieldtype": "Link",
+      "label": "Default Price List",
+      "options": "Cemetery Price List"
+    },
+    {
+      "default": "Monthly",
+      "fieldname": "default_payment_frequency",
+      "fieldtype": "Select",
+      "label": "Default Payment Frequency",
+      "options": "\nMonthly\nQuarterly\nSemi-Annual\nAnnual\nLump Sum"
+    },
+    {
+      "fieldname": "column_break_preneed",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "pre_need_deferred_revenue_account",
+      "fieldtype": "Link",
+      "label": "Pre-Need Deferred Revenue Account",
+      "options": "Account",
+      "description": "Account for pre-need contract payments until services are rendered"
     }
   ],
   "index_web_pages_for_search": 1,

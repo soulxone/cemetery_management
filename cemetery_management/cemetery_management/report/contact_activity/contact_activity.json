@@ -1,0 +1,16 @@
+{
+  "add_total_row": 0,
+  "creation": "2026-03-29 12:00:00.000000",
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "Yes",
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Contact Activity",
+  "owner": "Administrator",
+  "ref_doctype": "Contact Log",
+  "report_name": "Contact Activity",
+  "report_type": "Script Report",
+  "roles": [{"role": "System Manager"}]
+}

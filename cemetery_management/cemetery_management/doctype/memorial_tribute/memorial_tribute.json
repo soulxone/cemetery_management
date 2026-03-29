@@ -1,0 +1,143 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-29 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "burial_record",
+    "deceased_name",
+    "column_break_1",
+    "submitted_date",
+    "tribute_section",
+    "tribute_by",
+    "tribute_email",
+    "column_break_tribute",
+    "message",
+    "moderation_section",
+    "is_approved",
+    "column_break_mod",
+    "approved_by",
+    "approved_date"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "default": "MTR-.YYYY.-.#####",
+      "options": "MTR-.YYYY.-.#####",
+      "reqd": 1,
+      "no_copy": 1,
+      "print_hide": 1
+    },
+    {
+      "fieldname": "burial_record",
+      "fieldtype": "Link",
+      "label": "Burial Record",
+      "options": "Burial Record",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fetch_from": "burial_record.full_name",
+      "fieldname": "deceased_name",
+      "fieldtype": "Data",
+      "label": "Deceased Name",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Today",
+      "fieldname": "submitted_date",
+      "fieldtype": "Date",
+      "label": "Submitted Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tribute_section",
+      "fieldtype": "Section Break",
+      "label": "Tribute"
+    },
+    {
+      "fieldname": "tribute_by",
+      "fieldtype": "Data",
+      "label": "Tribute By",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "tribute_email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "column_break_tribute",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "message",
+      "fieldtype": "Text",
+      "label": "Message",
+      "reqd": 1
+    },
+    {
+      "fieldname": "moderation_section",
+      "fieldtype": "Section Break",
+      "label": "Moderation"
+    },
+    {
+      "default": "0",
+      "fieldname": "is_approved",
+      "fieldtype": "Check",
+      "label": "Approved",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_mod",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "approved_by",
+      "fieldtype": "Link",
+      "label": "Approved By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "approved_date",
+      "fieldtype": "Date",
+      "label": "Approved Date",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Memorial Tribute",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

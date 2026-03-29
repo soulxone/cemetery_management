@@ -61,3 +61,19 @@ def search_burials(query="", birth_year="", death_year="", veteran_only=""):
     )
 
     return results
+
+
+@frappe.whitelist(allow_guest=True)
+def get_recent_interments():
+    """Return last 5 burials by interment date for the recent interments widget."""
+    return frappe.get_all(
+        "Burial Record",
+        filters={"docstatus": 1},
+        fields=[
+            "name", "full_name", "date_of_death",
+            "interment_date", "burial_plot", "primary_photo",
+            "is_veteran", "military_branch",
+        ],
+        order_by="interment_date desc",
+        limit=5,
+    )

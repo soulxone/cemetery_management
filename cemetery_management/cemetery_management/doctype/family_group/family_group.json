@@ -1,0 +1,101 @@
+{
+  "actions": [],
+  "autoname": "format:FAM-{####}",
+  "creation": "2026-03-29 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "title_field": "family_name",
+  "show_title_field_in_link": 1,
+  "field_order": [
+    "family_name",
+    "primary_contact",
+    "column_break_1",
+    "phone",
+    "email",
+    "members_section",
+    "members",
+    "notes_section",
+    "notes"
+  ],
+  "fields": [
+    {
+      "bold": 1,
+      "fieldname": "family_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Family Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "primary_contact",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Primary Contact",
+      "options": "Plot Owner"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fetch_from": "primary_contact.phone",
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone",
+      "options": "Phone",
+      "read_only": 1
+    },
+    {
+      "fetch_from": "primary_contact.email",
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email",
+      "read_only": 1
+    },
+    {
+      "fieldname": "members_section",
+      "fieldtype": "Section Break",
+      "label": "Family Members"
+    },
+    {
+      "fieldname": "members",
+      "fieldtype": "Table",
+      "label": "Members",
+      "options": "Family Member"
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Family Group",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

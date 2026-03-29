@@ -46,6 +46,9 @@ scheduler_events = {}
 # Website routes
 website_route_rules = [
     {"from_route": "/cemetery-search", "to_route": "cemetery_search"},
+    {"from_route": "/cemetery-map", "to_route": "cemetery_map"},
+    {"from_route": "/memorial/<burial_record>", "to_route": "memorial"},
+    {"from_route": "/cemetery-veterans", "to_route": "cemetery_veterans"},
 ]
 
 # Website context

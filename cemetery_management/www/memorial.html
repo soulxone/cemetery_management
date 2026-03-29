@@ -1,0 +1,425 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<style>
+    .memorial-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .memorial-hero {
+        text-align: center;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #3a9e8a, #4ABFAB, #6BB8D4);
+        border-radius: 12px;
+        color: white;
+        margin-bottom: 24px;
+    }
+    .memorial-photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid rgba(255,255,255,0.5);
+        margin-bottom: 16px;
+    }
+    .memorial-photo-placeholder {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.2);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+        margin-bottom: 16px;
+        color: rgba(255,255,255,0.6);
+    }
+    .memorial-name {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0;
+        color: white;
+    }
+    .memorial-maiden {
+        font-size: 16px;
+        opacity: 0.85;
+        font-style: italic;
+    }
+    .memorial-dates {
+        font-size: 18px;
+        margin-top: 8px;
+        opacity: 0.9;
+    }
+    .memorial-age {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+    .veteran-section {
+        display: inline-block;
+        background: #2d5016;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 12px;
+    }
+    .memorial-section {
+        background: white;
+        border: 1px solid #e8e8e8;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 16px;
+    }
+    .memorial-section h3 {
+        margin: 0 0 12px 0;
+        font-size: 18px;
+        color: #333;
+        border-bottom: 2px solid #EBF6FA;
+        padding-bottom: 8px;
+    }
+    .epitaph {
+        font-style: italic;
+        font-size: 16px;
+        color: #555;
+        border-left: 3px solid #4ABFAB;
+        padding: 12px 16px;
+        background: #f9fffe;
+        border-radius: 0 6px 6px 0;
+    }
+    .detail-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    .detail-item {
+        font-size: 14px;
+    }
+    .detail-label {
+        color: #888;
+        font-size: 12px;
+    }
+    .detail-value {
+        color: #333;
+        font-weight: 500;
+    }
+    #memorial-map {
+        width: 100%;
+        height: 250px;
+        border-radius: 8px;
+        margin-top: 8px;
+    }
+    .photo-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+    .gallery-photo {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .gallery-photo:hover {
+        opacity: 0.9;
+    }
+    .tribute-card {
+        padding: 12px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .tribute-card:last-child {
+        border-bottom: none;
+    }
+    .tribute-by {
+        font-weight: 600;
+        color: #333;
+        font-size: 14px;
+    }
+    .tribute-date {
+        font-size: 12px;
+        color: #999;
+    }
+    .tribute-message {
+        margin-top: 4px;
+        font-size: 14px;
+        color: #555;
+        line-height: 1.5;
+    }
+    .tribute-form {
+        background: #F4F6F8;
+        padding: 16px;
+        border-radius: 8px;
+        margin-top: 12px;
+    }
+    .tribute-form input, .tribute-form textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        margin-bottom: 8px;
+        font-family: inherit;
+    }
+    .tribute-form textarea {
+        height: 80px;
+        resize: vertical;
+    }
+    .tribute-submit {
+        padding: 10px 24px;
+        background: #4ABFAB;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .tribute-submit:hover {
+        background: #3a9e8a;
+    }
+    .tribute-success {
+        color: #2d5016;
+        background: #e8f5e9;
+        padding: 10px;
+        border-radius: 6px;
+        margin-top: 8px;
+        display: none;
+    }
+    .share-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+    }
+    .share-btn {
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    .share-facebook {
+        background: #1877f2;
+        color: white;
+    }
+    .share-email {
+        background: #666;
+        color: white;
+    }
+    .findagrave-btn {
+        display: inline-block;
+        background: #EBF6FA;
+        color: #4ABFAB;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        margin-top: 8px;
+    }
+    .nav-links {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+    .nav-links a {
+        color: #4ABFAB;
+        text-decoration: none;
+        margin: 0 12px;
+    }
+    @media (max-width: 600px) {
+        .memorial-name { font-size: 24px; }
+        .detail-grid { grid-template-columns: 1fr; }
+        .photo-gallery { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+    }
+</style>
+
+{% if has_map %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+{% endif %}
+
+<div class="memorial-container">
+    <!-- Hero Section -->
+    <div class="memorial-hero">
+        {% if record.primary_photo %}
+        <img class="memorial-photo" src="{{ record.primary_photo }}" alt="{{ record.full_name }}">
+        {% else %}
+        <div class="memorial-photo-placeholder">&#9768;</div>
+        {% endif %}
+
+        <h1 class="memorial-name">{{ record.full_name }}</h1>
+        {% if record.maiden_name %}
+        <div class="memorial-maiden">n&eacute;e {{ record.maiden_name }}</div>
+        {% endif %}
+
+        <div class="memorial-dates">
+            {{ record.date_of_birth | default("?", true) }} &mdash; {{ record.date_of_death | default("?", true) }}
+        </div>
+        {% if record.age_at_death %}
+        <div class="memorial-age">{{ record.age_at_death }}</div>
+        {% endif %}
+
+        {% if record.is_veteran %}
+        <div class="veteran-section">
+            {{ record.military_branch or "Veteran" }}
+            {% if record.military_rank %} &middot; {{ record.military_rank }}{% endif %}
+            {% if record.military_war %} &middot; {{ record.military_war }}{% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Epitaph -->
+    {% if record.epitaph %}
+    <div class="memorial-section">
+        <div class="epitaph">{{ record.epitaph }}</div>
+    </div>
+    {% endif %}
+
+    <!-- Details -->
+    <div class="memorial-section">
+        <h3>Details</h3>
+        <div class="detail-grid">
+            {% if record.burial_plot %}
+            <div class="detail-item">
+                <div class="detail-label">Plot</div>
+                <div class="detail-value">{{ record.burial_plot }}</div>
+            </div>
+            {% endif %}
+            {% if record.cemetery %}
+            <div class="detail-item">
+                <div class="detail-label">Cemetery</div>
+                <div class="detail-value">{{ record.cemetery }}</div>
+            </div>
+            {% endif %}
+            {% if record.interment_date %}
+            <div class="detail-item">
+                <div class="detail-label">Interment Date</div>
+                <div class="detail-value">{{ record.interment_date }}</div>
+            </div>
+            {% endif %}
+            {% if record.interment_type %}
+            <div class="detail-item">
+                <div class="detail-label">Interment Type</div>
+                <div class="detail-value">{{ record.interment_type }}</div>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if record.findagrave_url %}
+        <a href="{{ record.findagrave_url }}" target="_blank" class="findagrave-btn">
+            View on FindAGrave &rarr;
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- Map -->
+    {% if has_map %}
+    <div class="memorial-section">
+        <h3>Location</h3>
+        <div id="memorial-map"></div>
+    </div>
+    {% endif %}
+
+    <!-- Photo Gallery -->
+    {% if photos %}
+    <div class="memorial-section">
+        <h3>Photos</h3>
+        <div class="photo-gallery">
+            {% for photo in photos %}
+            <img class="gallery-photo" src="{{ photo.photo }}" alt="{{ photo.caption or record.full_name }}" title="{{ photo.caption or '' }}">
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Tributes -->
+    <div class="memorial-section">
+        <h3>Tributes</h3>
+        {% if tributes %}
+        <div id="tributes-list">
+            {% for t in tributes %}
+            <div class="tribute-card">
+                <span class="tribute-by">{{ t.tribute_by }}</span>
+                <span class="tribute-date">&middot; {{ t.submitted_date }}</span>
+                <div class="tribute-message">{{ t.message }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="color:#888; font-size:14px;">No tributes yet. Be the first to leave one.</p>
+        {% endif %}
+
+        <div class="tribute-form">
+            <h4 style="margin:0 0 10px 0; font-size:15px;">Leave a Tribute</h4>
+            <input type="text" id="tribute-name" placeholder="Your Name" required>
+            <input type="email" id="tribute-email" placeholder="Your Email (optional)">
+            <textarea id="tribute-message" placeholder="Your message of remembrance..."></textarea>
+            <button class="tribute-submit" onclick="submitTribute()">Submit Tribute</button>
+            <div class="tribute-success" id="tribute-success">
+                Thank you. Your tribute will appear after review.
+            </div>
+        </div>
+    </div>
+
+    <!-- Share -->
+    <div class="memorial-section">
+        <h3>Share</h3>
+        <div class="share-buttons">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ frappe.utils.get_url() }}/memorial/{{ record.name }}"
+               target="_blank" class="share-btn share-facebook">Share on Facebook</a>
+            <a href="mailto:?subject=In Memory of {{ record.full_name }}&body=View the memorial page: {{ frappe.utils.get_url() }}/memorial/{{ record.name }}"
+               class="share-btn share-email">Share via Email</a>
+        </div>
+    </div>
+
+    <div class="nav-links">
+        <a href="/cemetery-search">&larr; Search Records</a>
+        <a href="/cemetery-map">View Map</a>
+    </div>
+</div>
+
+<script>
+    {% if has_map %}
+    document.addEventListener('DOMContentLoaded', function() {
+        var map = L.map('memorial-map').setView([{{ plot_lat }}, {{ plot_lng }}], 18);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors',
+            maxZoom: 22
+        }).addTo(map);
+        L.marker([{{ plot_lat }}, {{ plot_lng }}]).addTo(map)
+            .bindPopup('<strong>{{ record.full_name }}</strong><br>{{ record.burial_plot }}')
+            .openPopup();
+    });
+    {% endif %}
+
+    function submitTribute() {
+        var name = document.getElementById('tribute-name').value.trim();
+        var email = document.getElementById('tribute-email').value.trim();
+        var message = document.getElementById('tribute-message').value.trim();
+
+        if (!name || !message) {
+            frappe.msgprint('Please enter your name and a message.');
+            return;
+        }
+
+        frappe.call({
+            method: 'cemetery_management.www.memorial.submit_tribute',
+            args: {
+                burial_record: '{{ record.name }}',
+                tribute_by: name,
+                tribute_email: email,
+                message: message
+            },
+            callback: function(r) {
+                document.getElementById('tribute-success').style.display = 'block';
+                document.getElementById('tribute-name').value = '';
+                document.getElementById('tribute-email').value = '';
+                document.getElementById('tribute-message').value = '';
+            }
+        });
+    }
+</script>
+{% endblock %}

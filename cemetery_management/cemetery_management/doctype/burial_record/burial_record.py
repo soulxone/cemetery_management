@@ -1,7 +1,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import cint, date_diff, getdate
+from frappe.utils import add_days, add_months, cint, date_diff, getdate, today
 
 
 class BurialRecord(Document):
@@ -33,6 +33,7 @@ class BurialRecord(Document):
 	def on_submit(self):
 		self.update_plot_status()
 		self.link_church_member()
+		self.create_aftercare_schedules()
 
 	def on_cancel(self):
 		self.revert_plot_status()
@@ -65,3 +66,29 @@ class BurialRecord(Document):
 			frappe.db.set_value(
 				"Church Member", self.church_member, "burial_record", None
 			)
+
+	def create_aftercare_schedules(self):
+		"""Auto-create 30-day, 6-month, and anniversary aftercare schedules."""
+		base_date = self.interment_date or today()
+
+		# Get plot owner from burial plot if available
+		plot_owner = None
+		if self.burial_plot:
+			plot_owner = frappe.db.get_value("Burial Plot", self.burial_plot, "plot_owner")
+
+		schedules = [
+			("30-Day", add_days(base_date, 30)),
+			("6-Month", add_months(base_date, 6)),
+			("Anniversary", add_months(base_date, 12)),
+		]
+
+		for schedule_type, scheduled_date in schedules:
+			doc = frappe.new_doc("Aftercare Schedule")
+			doc.burial_record = self.name
+			doc.schedule_type = schedule_type
+			doc.scheduled_date = scheduled_date
+			if plot_owner:
+				doc.plot_owner = plot_owner
+			doc.insert(ignore_permissions=True)
+
+		frappe.db.commit()

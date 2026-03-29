@@ -1,0 +1,16 @@
+{
+  "add_total_row": 1,
+  "creation": "2026-03-29 12:00:00.000000",
+  "docstatus": 0,
+  "doctype": "Report",
+  "is_standard": "Yes",
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Pre-Need Contract Status",
+  "owner": "Administrator",
+  "ref_doctype": "Pre-Need Contract",
+  "report_name": "Pre-Need Contract Status",
+  "report_type": "Script Report",
+  "roles": [{"role": "System Manager"}]
+}

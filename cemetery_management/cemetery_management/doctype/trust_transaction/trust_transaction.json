@@ -1,0 +1,162 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-29 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "is_submittable": 1,
+  "field_order": [
+    "naming_series",
+    "transaction_date",
+    "perpetual_care_trust",
+    "column_break_1",
+    "transaction_type",
+    "amount",
+    "company",
+    "reference_section",
+    "reference_doctype",
+    "column_break_ref",
+    "reference_name",
+    "accounting_section",
+    "journal_entry",
+    "notes_section",
+    "description",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "default": "TTX-.YYYY.-.#####",
+      "options": "TTX-.YYYY.-.#####",
+      "reqd": 1,
+      "no_copy": 1,
+      "print_hide": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "transaction_date",
+      "fieldtype": "Date",
+      "label": "Transaction Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "perpetual_care_trust",
+      "fieldtype": "Link",
+      "label": "Trust Fund",
+      "options": "Perpetual Care Trust",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "transaction_type",
+      "fieldtype": "Select",
+      "label": "Transaction Type",
+      "options": "Contribution\nWithdrawal\nEarnings\nFee",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "label": "Amount",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "reference_section",
+      "fieldtype": "Section Break",
+      "label": "Reference",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "reference_doctype",
+      "fieldtype": "Select",
+      "label": "Reference Type",
+      "options": "\nPlot Sale\nCemetery Service Invoice\nJournal Entry\nContract Payment"
+    },
+    {
+      "fieldname": "column_break_ref",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "reference_name",
+      "fieldtype": "Dynamic Link",
+      "label": "Reference Name",
+      "options": "reference_doctype"
+    },
+    {
+      "fieldname": "accounting_section",
+      "fieldtype": "Section Break",
+      "label": "Accounting",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "journal_entry",
+      "fieldtype": "Link",
+      "label": "Journal Entry",
+      "options": "Journal Entry",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Trust Transaction",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Trust Transaction",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "amend": 1,
+      "cancel": 1,
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "submit": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

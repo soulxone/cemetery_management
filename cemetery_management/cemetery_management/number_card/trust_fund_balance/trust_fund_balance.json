@@ -1,0 +1,22 @@
+{
+  "aggregate_function_based_on": "current_balance",
+  "color": "#27ae60",
+  "creation": "2026-03-29 12:00:00.000000",
+  "docstatus": 0,
+  "doctype": "Number Card",
+  "document_type": "Perpetual Care Trust",
+  "dynamic_filters_json": "[]",
+  "filters_json": "[[\"Perpetual Care Trust\",\"docstatus\",\"=\",\"1\"]]",
+  "function": "Sum",
+  "is_public": 1,
+  "is_standard": 1,
+  "label": "Trust Fund Balance",
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Trust Fund Balance",
+  "owner": "Administrator",
+  "show_percentage_stats": 1,
+  "stats_time_interval": "Monthly",
+  "type": "Document Type"
+}

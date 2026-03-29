@@ -1,1 +1,80 @@
 /* Cemetery Management Styles */
+
+/* Responsive adjustments for public pages */
+@media (max-width: 768px) {
+	.cemetery-search-container,
+	.cemetery-map-container,
+	.memorial-container {
+		padding: 10px;
+	}
+
+	.cemetery-header {
+		padding: 20px 15px;
+	}
+	.cemetery-header h1 {
+		font-size: 22px;
+	}
+
+	.search-row {
+		flex-direction: column;
+	}
+	.search-field {
+		min-width: 100%;
+	}
+
+	.burial-card {
+		flex-direction: column;
+	}
+
+	#cemetery-map {
+		height: 350px;
+	}
+
+	.memorial-name {
+		font-size: 24px;
+	}
+	.memorial-photo {
+		width: 120px;
+		height: 120px;
+	}
+
+	.detail-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.photo-gallery {
+		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	}
+
+	.recent-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.map-toolbar {
+		flex-direction: column;
+	}
+}
+
+@media (max-width: 480px) {
+	.recent-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.share-buttons {
+		flex-direction: column;
+	}
+}
+
+/* Work Order status badges in list view */
+.list-row .indicator-pill[data-status="Open"] {
+	background: #fff3cd;
+	color: #856404;
+}
+.list-row .indicator-pill[data-status="In Progress"] {
+	background: #cce5ff;
+	color: #004085;
+}
+.list-row .indicator-pill[data-status="Completed"] {
+	background: #d4edda;
+	color: #155724;
+}

@@ -165,6 +165,16 @@ def create_workspace_sidebar():
          "link_to": "Burial Record", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
         {"label": "Burial Plot", "link_type": "DocType", "type": "Link",
          "link_to": "Burial Plot", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Memorial Tribute", "link_type": "DocType", "type": "Link",
+         "link_to": "Memorial Tribute", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+
+        # Operations
+        {"label": "Operations", "link_type": "DocType", "type": "Section Break",
+         "link_to": None, "child": 0, "collapsible": 1, "indent": 1, "icon": "tool"},
+        {"label": "Cemetery Work Order", "link_type": "DocType", "type": "Link",
+         "link_to": "Cemetery Work Order", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Work Order Summary", "link_type": "Report", "type": "Link",
+         "link_to": "Work Order Summary", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
 
         # Sales & Finance
         {"label": "Sales & Finance", "link_type": "DocType", "type": "Section Break",
@@ -175,18 +185,60 @@ def create_workspace_sidebar():
          "link_to": "Cemetery Service Invoice", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
         {"label": "Cemetery Fee Type", "link_type": "DocType", "type": "Link",
          "link_to": "Cemetery Fee Type", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Cemetery Price List", "link_type": "DocType", "type": "Link",
+         "link_to": "Cemetery Price List", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
         {"label": "Journal Entry", "link_type": "DocType", "type": "Link",
          "link_to": "Journal Entry", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
         {"label": "Chart of Accounts", "link_type": "DocType", "type": "Link",
          "link_to": "Account", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
 
-        # People
-        {"label": "People", "link_type": "DocType", "type": "Section Break",
+        # Pre-Need Sales
+        {"label": "Pre-Need Sales", "link_type": "DocType", "type": "Section Break",
+         "link_to": None, "child": 0, "collapsible": 1, "indent": 1, "icon": "file"},
+        {"label": "Pre-Need Contract", "link_type": "DocType", "type": "Link",
+         "link_to": "Pre-Need Contract", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Contract Payment", "link_type": "DocType", "type": "Link",
+         "link_to": "Contract Payment", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Pre-Need Contract Status", "link_type": "Report", "type": "Link",
+         "link_to": "Pre-Need Contract Status", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Payment Schedule", "link_type": "Report", "type": "Link",
+         "link_to": "Payment Schedule", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+
+        # Trust Funds
+        {"label": "Trust Funds", "link_type": "DocType", "type": "Section Break",
+         "link_to": None, "child": 0, "collapsible": 1, "indent": 1, "icon": "bank"},
+        {"label": "Perpetual Care Trust", "link_type": "DocType", "type": "Link",
+         "link_to": "Perpetual Care Trust", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Trust Transaction", "link_type": "DocType", "type": "Link",
+         "link_to": "Trust Transaction", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Trust Fund Balance", "link_type": "Report", "type": "Link",
+         "link_to": "Trust Fund Balance", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Trust Transaction History", "link_type": "Report", "type": "Link",
+         "link_to": "Trust Transaction History", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+
+        # People & CRM
+        {"label": "People & CRM", "link_type": "DocType", "type": "Section Break",
          "link_to": None, "child": 0, "collapsible": 1, "indent": 1, "icon": "users"},
         {"label": "Plot Owner", "link_type": "DocType", "type": "Link",
          "link_to": "Plot Owner", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Family Group", "link_type": "DocType", "type": "Link",
+         "link_to": "Family Group", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Contact Log", "link_type": "DocType", "type": "Link",
+         "link_to": "Contact Log", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Aftercare Schedule", "link_type": "DocType", "type": "Link",
+         "link_to": "Aftercare Schedule", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
         {"label": "Funeral Home", "link_type": "DocType", "type": "Link",
          "link_to": "Funeral Home", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Aftercare Due", "link_type": "Report", "type": "Link",
+         "link_to": "Aftercare Due", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Contact Activity", "link_type": "Report", "type": "Link",
+         "link_to": "Contact Activity", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+
+        # Cremation & Tracking
+        {"label": "Cremation & Tracking", "link_type": "DocType", "type": "Section Break",
+         "link_to": None, "child": 0, "collapsible": 1, "indent": 1, "icon": "file"},
+        {"label": "Remains Tracking", "link_type": "DocType", "type": "Link",
+         "link_to": "Remains Tracking", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
 
         # Reports
         {"label": "Reports", "link_type": "DocType", "type": "Section Break",
@@ -199,12 +251,20 @@ def create_workspace_sidebar():
          "link_to": "Cemetery Financial Summary", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
         {"label": "Perpetual Care Fund", "link_type": "Report", "type": "Link",
          "link_to": "Perpetual Care Fund", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Veteran Burial Report", "link_type": "Report", "type": "Link",
+         "link_to": "Veteran Burial Report", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Demographic Analysis", "link_type": "Report", "type": "Link",
+         "link_to": "Demographic Analysis", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Revenue Forecast", "link_type": "Report", "type": "Link",
+         "link_to": "Revenue Forecast", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
 
         # Settings
         {"label": "Settings", "link_type": "DocType", "type": "Section Break",
          "link_to": None, "child": 0, "collapsible": 1, "indent": 1, "icon": "setting-gear"},
         {"label": "Monument Type", "link_type": "DocType", "type": "Link",
          "link_to": "Monument Type", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
+        {"label": "Contract Template", "link_type": "DocType", "type": "Link",
+         "link_to": "Contract Template", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
         {"label": "Cemetery Settings", "link_type": "DocType", "type": "Link",
          "link_to": "Cemetery Settings", "child": 1, "collapsible": 1, "indent": 0, "icon": ""},
     ]

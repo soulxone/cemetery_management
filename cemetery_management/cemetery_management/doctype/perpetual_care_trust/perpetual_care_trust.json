@@ -1,0 +1,140 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-29 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "is_submittable": 1,
+  "title_field": "trust_name",
+  "show_title_field_in_link": 1,
+  "field_order": [
+    "naming_series",
+    "trust_name",
+    "fund_type",
+    "column_break_1",
+    "company",
+    "trust_account",
+    "balance_section",
+    "opening_balance",
+    "column_break_bal",
+    "current_balance",
+    "description_section",
+    "description",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "default": "PCT-.YYYY.-.#####",
+      "options": "PCT-.YYYY.-.#####",
+      "reqd": 1,
+      "no_copy": 1,
+      "print_hide": 1
+    },
+    {
+      "bold": 1,
+      "fieldname": "trust_name",
+      "fieldtype": "Data",
+      "label": "Trust Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "fund_type",
+      "fieldtype": "Select",
+      "label": "Fund Type",
+      "options": "Perpetual Care\nMerchandise\nEndowment",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "trust_account",
+      "fieldtype": "Link",
+      "label": "Trust Account",
+      "options": "Account",
+      "reqd": 1
+    },
+    {
+      "fieldname": "balance_section",
+      "fieldtype": "Section Break",
+      "label": "Balance"
+    },
+    {
+      "fieldname": "opening_balance",
+      "fieldtype": "Currency",
+      "label": "Opening Balance",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_bal",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "current_balance",
+      "fieldtype": "Currency",
+      "label": "Current Balance",
+      "read_only": 1,
+      "in_list_view": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "description_section",
+      "fieldtype": "Section Break",
+      "label": "Description",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Perpetual Care Trust",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Perpetual Care Trust",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "amend": 1,
+      "cancel": 1,
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "submit": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

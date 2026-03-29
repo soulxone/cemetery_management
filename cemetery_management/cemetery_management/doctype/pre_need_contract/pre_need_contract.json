@@ -1,0 +1,318 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-29 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "is_submittable": 1,
+  "title_field": "buyer_name",
+  "show_title_field_in_link": 1,
+  "field_order": [
+    "naming_series",
+    "contract_date",
+    "company",
+    "column_break_header",
+    "contract_status",
+    "buyer_section",
+    "buyer_name",
+    "plot_owner",
+    "column_break_buyer",
+    "church_member",
+    "phone",
+    "email",
+    "plot_section",
+    "burial_plot",
+    "column_break_plot",
+    "cemetery",
+    "services_section",
+    "services",
+    "financial_section",
+    "total_amount",
+    "column_break_fin1",
+    "payment_frequency",
+    "number_of_payments",
+    "column_break_fin2",
+    "installment_amount",
+    "tracking_section",
+    "payments_completed",
+    "total_paid",
+    "column_break_tracking",
+    "balance_remaining",
+    "next_payment_due",
+    "fulfillment_section",
+    "converted_to_plot_sale",
+    "column_break_fulfill",
+    "fulfillment_date",
+    "notes_section",
+    "notes",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "default": "PNC-.YYYY.-.#####",
+      "options": "PNC-.YYYY.-.#####",
+      "reqd": 1,
+      "no_copy": 1,
+      "print_hide": 1
+    },
+    {
+      "default": "Today",
+      "fieldname": "contract_date",
+      "fieldtype": "Date",
+      "label": "Contract Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_header",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "Draft",
+      "fieldname": "contract_status",
+      "fieldtype": "Select",
+      "label": "Contract Status",
+      "options": "Draft\nActive\nFulfilled\nCancelled\nDefaulted",
+      "in_list_view": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "buyer_section",
+      "fieldtype": "Section Break",
+      "label": "Buyer Information"
+    },
+    {
+      "bold": 1,
+      "fieldname": "buyer_name",
+      "fieldtype": "Data",
+      "label": "Buyer Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "plot_owner",
+      "fieldtype": "Link",
+      "label": "Plot Owner",
+      "options": "Plot Owner"
+    },
+    {
+      "fieldname": "column_break_buyer",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "church_member",
+      "fieldtype": "Link",
+      "label": "Church Member",
+      "options": "Church Member"
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "plot_section",
+      "fieldtype": "Section Break",
+      "label": "Plot Details"
+    },
+    {
+      "fieldname": "burial_plot",
+      "fieldtype": "Link",
+      "label": "Burial Plot",
+      "options": "Burial Plot",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_plot",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fetch_from": "burial_plot.cemetery",
+      "fieldname": "cemetery",
+      "fieldtype": "Link",
+      "label": "Cemetery",
+      "options": "Cemetery",
+      "read_only": 1
+    },
+    {
+      "fieldname": "services_section",
+      "fieldtype": "Section Break",
+      "label": "Contracted Services"
+    },
+    {
+      "fieldname": "services",
+      "fieldtype": "Table",
+      "label": "Services",
+      "options": "Contract Service",
+      "reqd": 1
+    },
+    {
+      "fieldname": "financial_section",
+      "fieldtype": "Section Break",
+      "label": "Financial Details"
+    },
+    {
+      "fieldname": "total_amount",
+      "fieldtype": "Currency",
+      "label": "Total Amount",
+      "read_only": 1,
+      "in_list_view": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "column_break_fin1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payment_frequency",
+      "fieldtype": "Select",
+      "label": "Payment Frequency",
+      "options": "\nMonthly\nQuarterly\nSemi-Annual\nAnnual\nLump Sum",
+      "reqd": 1
+    },
+    {
+      "fieldname": "number_of_payments",
+      "fieldtype": "Int",
+      "label": "Number of Payments",
+      "description": "Total planned payments (set to 1 for Lump Sum)"
+    },
+    {
+      "fieldname": "column_break_fin2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "installment_amount",
+      "fieldtype": "Currency",
+      "label": "Installment Amount",
+      "read_only": 1,
+      "description": "Auto-computed: Total / Number of Payments"
+    },
+    {
+      "fieldname": "tracking_section",
+      "fieldtype": "Section Break",
+      "label": "Payment Tracking"
+    },
+    {
+      "default": "0",
+      "fieldname": "payments_completed",
+      "fieldtype": "Int",
+      "label": "Payments Completed",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "total_paid",
+      "fieldtype": "Currency",
+      "label": "Total Paid",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "column_break_tracking",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "balance_remaining",
+      "fieldtype": "Currency",
+      "label": "Balance Remaining",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "next_payment_due",
+      "fieldtype": "Date",
+      "label": "Next Payment Due",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "fulfillment_section",
+      "fieldtype": "Section Break",
+      "label": "Fulfillment",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "converted_to_plot_sale",
+      "fieldtype": "Link",
+      "label": "Converted to Plot Sale",
+      "options": "Plot Sale",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "column_break_fulfill",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "fulfillment_date",
+      "fieldtype": "Date",
+      "label": "Fulfillment Date",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Pre-Need Contract",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-03-29 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Cemetery Management",
+  "name": "Pre-Need Contract",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "amend": 1,
+      "cancel": 1,
+      "create": 1,
+      "delete": 1,
+      "read": 1,
+      "submit": 1,
+      "write": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

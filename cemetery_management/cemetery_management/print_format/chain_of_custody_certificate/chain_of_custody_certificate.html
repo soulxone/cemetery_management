@@ -1,0 +1,84 @@
+<style>
+    .coc-certificate { font-family: 'Georgia', serif; max-width: 700px; margin: 0 auto; }
+    .coc-header { text-align: center; border-bottom: 3px double #333; padding-bottom: 15px; margin-bottom: 20px; }
+    .coc-header h1 { font-size: 22px; margin: 0; letter-spacing: 2px; text-transform: uppercase; }
+    .coc-header h2 { font-size: 16px; margin: 5px 0 0; font-weight: normal; color: #555; }
+    .coc-details { margin-bottom: 20px; }
+    .coc-details table { width: 100%; border-collapse: collapse; }
+    .coc-details td { padding: 4px 8px; font-size: 13px; }
+    .coc-details .label { font-weight: bold; width: 140px; color: #333; }
+    .coc-details .value { color: #555; }
+    .coc-log { margin-top: 20px; }
+    .coc-log h3 { font-size: 15px; margin: 0 0 10px; border-bottom: 1px solid #999; padding-bottom: 5px; }
+    .coc-log table { width: 100%; border-collapse: collapse; }
+    .coc-log th { background: #f0f0f0; padding: 6px 8px; font-size: 12px; text-align: left; border: 1px solid #ddd; }
+    .coc-log td { padding: 5px 8px; font-size: 12px; border: 1px solid #ddd; }
+    .coc-footer { margin-top: 30px; font-size: 11px; color: #888; text-align: center; border-top: 1px solid #ccc; padding-top: 10px; }
+</style>
+
+<div class="coc-certificate">
+    <div class="coc-header">
+        <h1>Chain of Custody Certificate</h1>
+        <h2>Pleasant Springs Cemetery</h2>
+    </div>
+
+    <div class="coc-details">
+        <table>
+            <tr>
+                <td class="label">Document ID:</td>
+                <td class="value">{{ doc.name }}</td>
+                <td class="label">Status:</td>
+                <td class="value">{{ doc.status }}</td>
+            </tr>
+            <tr>
+                <td class="label">Deceased:</td>
+                <td class="value"><strong>{{ doc.deceased_name }}</strong></td>
+                <td class="label">Received Date:</td>
+                <td class="value">{{ doc.received_date }}</td>
+            </tr>
+            <tr>
+                <td class="label">Funeral Home:</td>
+                <td class="value">{{ doc.funeral_home or "-" }}</td>
+                <td class="label">Burial Record:</td>
+                <td class="value">{{ doc.burial_record or "-" }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="coc-log">
+        <h3>Custody Log</h3>
+        {% if doc.custody_log %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date/Time</th>
+                    <th>Location</th>
+                    <th>Received By</th>
+                    <th>Released By</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in doc.custody_log %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ entry.timestamp }}</td>
+                    <td>{{ entry.location }}</td>
+                    <td>{{ entry.received_by or "-" }}</td>
+                    <td>{{ entry.released_by or "-" }}</td>
+                    <td>{{ entry.notes or "-" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p style="font-style: italic; color: #888;">No custody log entries recorded.</p>
+        {% endif %}
+    </div>
+
+    <div class="coc-footer">
+        <p>This document certifies the chain of custody for the above-named deceased.</p>
+        <p>Generated on {{ frappe.utils.today() }} | Pleasant Springs Cemetery, Henderson, Tennessee</p>
+    </div>
+</div>
