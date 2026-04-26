@@ -16,7 +16,37 @@ def get_context(context):
 		frappe.throw("Memorial not found", frappe.DoesNotExistError)
 
 	context.record = record
-	context.page_title = f"In Memory of {record.full_name}"
+	context.page_title = f"In Memory of {record.full_name} | Pleasant Springs Cemetery"
+	context.title = context.page_title
+
+	# Build per-memorial SEO description
+	years = ""
+	if record.date_of_birth and record.date_of_death:
+		years = f" ({record.date_of_birth.year}–{record.date_of_death.year})"
+	elif record.date_of_death:
+		years = f" (d. {record.date_of_death.year})"
+	memorial_desc = (
+		f"Memorial page for {record.full_name}{years}, interred at Pleasant "
+		f"Springs Cemetery near Henderson, Tennessee. Family tributes, photos, "
+		f"and burial information."
+	)
+	og_image = (record.primary_photo if record.primary_photo
+				else "https://ps-church.com/files/og-default.png")
+	if og_image and not og_image.startswith("http"):
+		og_image = f"https://ps-church.com{og_image}"
+
+	context.metatags = {
+		"title": context.page_title,
+		"description": memorial_desc,
+		"keywords": f"{record.full_name}, pleasant springs cemetery, memorial, tennessee genealogy",
+		"image": og_image,
+		"og:type": "profile",
+		"og:title": f"In Memory of {record.full_name}",
+		"og:description": memorial_desc,
+		"og:image": og_image,
+		"og:url": f"https://ps-church.com/memorial?burial_record={burial_record}",
+		"twitter:card": "summary_large_image",
+	}
 	context.no_breadcrumbs = True
 
 	# Get photos

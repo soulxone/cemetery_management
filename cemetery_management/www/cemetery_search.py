@@ -4,7 +4,20 @@ no_cache = 1
 
 
 def get_context(context):
-    context.page_title = "Cemetery Search - Pleasant Springs Cemetery"
+    context.page_title = "Pleasant Springs Cemetery — Search 481+ Records | Henderson & Pinson, TN"
+    context.title = context.page_title
+    context.metatags = {
+        "title": context.page_title,
+        "description": "Search 481+ historical records at Pleasant Springs Cemetery near Pinson and Henderson, Tennessee. Free genealogy lookup for families and researchers.",
+        "keywords": "pleasant springs cemetery, pinson tn cemetery, henderson tn cemetery, chester county tn cemetery, tennessee genealogy, findagrave pleasant springs",
+        "image": "https://ps-church.com/files/og-default.png",
+        "og:type": "website",
+        "og:title": "Pleasant Springs Cemetery — Search 481+ Records",
+        "og:description": "Free searchable historical cemetery records near Pinson and Henderson, Tennessee. 481+ memorials with family genealogy and burial history.",
+        "og:image": "https://ps-church.com/files/og-default.png",
+        "og:url": "https://ps-church.com/cemetery-search",
+        "twitter:card": "summary_large_image",
+    }
     context.no_breadcrumbs = True
 
     if frappe.db.exists("Cemetery", "Pleasant Springs Cemetery"):

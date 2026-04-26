@@ -4,7 +4,20 @@ no_cache = 1
 
 
 def get_context(context):
-	context.page_title = "Cemetery Map - Pleasant Springs Cemetery"
+	context.page_title = "Pleasant Springs Cemetery Map | Henderson & Pinson, TN"
+	context.title = context.page_title
+	context.metatags = {
+		"title": context.page_title,
+		"description": "Interactive map of Pleasant Springs Cemetery near Pinson and Henderson, Tennessee. Find burial plots, navigate the grounds, and locate ancestors.",
+		"keywords": "pleasant springs cemetery map, cemetery plot map tennessee, find a grave map pinson tn",
+		"image": "https://ps-church.com/files/og-default.png",
+		"og:type": "website",
+		"og:title": "Pleasant Springs Cemetery Map",
+		"og:description": "Interactive map of burial plots and cemetery grounds near Pinson, Tennessee.",
+		"og:image": "https://ps-church.com/files/og-default.png",
+		"og:url": "https://ps-church.com/cemetery-map",
+		"twitter:card": "summary_large_image",
+	}
 	context.no_breadcrumbs = True
 
 	settings = frappe.get_single("Cemetery Settings")
