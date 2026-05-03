@@ -27,7 +27,7 @@ def get_context(context):
 		years = f" (d. {record.date_of_death.year})"
 	memorial_desc = (
 		f"Memorial page for {record.full_name}{years}, interred at Pleasant "
-		f"Springs Cemetery near Henderson, Tennessee. Family tributes, photos, "
+		f"Springs Cemetery near Pinson, Tennessee. Family tributes, photos, "
 		f"and burial information."
 	)
 	og_image = (record.primary_photo if record.primary_photo

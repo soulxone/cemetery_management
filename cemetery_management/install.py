@@ -55,7 +55,7 @@ def create_default_cemetery():
         doc.status = "Active"
         doc.findagrave_id = "17250"
         doc.findagrave_url = "https://www.findagrave.com/cemetery/17250/pleasant-springs-cemetery"
-        doc.city = "Henderson"
+        doc.city = "Pinson"
         doc.state = "Tennessee"
         doc.county = "Chester"
         doc.latitude = 35.418182

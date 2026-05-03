@@ -4,11 +4,11 @@ no_cache = 1
 
 
 def get_context(context):
-	context.page_title = "Pleasant Springs Cemetery Map | Henderson & Pinson, TN"
+	context.page_title = "Pleasant Springs Cemetery Map | Pinson, TN"
 	context.title = context.page_title
 	context.metatags = {
 		"title": context.page_title,
-		"description": "Interactive map of Pleasant Springs Cemetery near Pinson and Henderson, Tennessee. Find burial plots, navigate the grounds, and locate ancestors.",
+		"description": "Interactive map of Pleasant Springs Cemetery near Pinson, Tennessee. Find burial plots, navigate the grounds, and locate ancestors.",
 		"keywords": "pleasant springs cemetery map, cemetery plot map tennessee, find a grave map pinson tn",
 		"image": "https://ps-church.com/files/og-default.png",
 		"og:type": "website",
